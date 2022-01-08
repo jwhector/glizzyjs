@@ -1,0 +1,12 @@
+{
+    "daily": {
+        "id": "826229995974295552",
+        "name": "Daily",
+        "description": "Be notified of the daily reset each day at 5 PM Pacific."
+    },
+    "challenge of the day": {
+        "id": "836719621460721694",
+        "name": "Challenge of the Day",
+        "description": "Be notified of Challenge of the Day posts each day at 10 AM Pacific."
+    }
+}

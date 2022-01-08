@@ -1,0 +1,26 @@
+{
+  "name": "glizzyjs",
+  "version": "1.0.0",
+  "description": "Glizzys United Discord bot built using Node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jared Hector",
+  "license": "ISC",
+  "dependencies": {
+    "@stdlib/stdlib": "0.0.94",
+    "axios": "^0.21.1",
+    "canvas": "^2.8.0",
+    "cron": "^1.8.2",
+    "discord-reply": "^0.1.2",
+    "discord.js": "^12.5.1",
+    "dotenv": "^8.2.0",
+    "eslint": "^7.23.0",
+    "mysql2": "^2.2.5",
+    "pg": "^8.5.1",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.6.2"
+  },
+  "nodeVersion": "12.16.3"
+}
