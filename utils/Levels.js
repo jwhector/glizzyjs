@@ -1,4 +1,3 @@
-const gobbler = require('../Gobbler');
 const levelRoles = require('./levelroles.json');
 
 class Levels {
@@ -42,7 +41,6 @@ class Levels {
     }
 
     static getCost(level) {
-        // console.log('USER LEVEL: ' + level);
         return Math.floor(200 * 1.027 ** level);
     }
 }

@@ -2,6 +2,7 @@ module.exports = {
     name: 'shardcraft',
     description: 'Fuse shard matter or focus shards together.',
     aliases: ['sc'],
+    hidden: true,
     async execute(p) {
         console.log('Giving!');
         const target = p.msg.mentions.users.first() || p.msg.author;

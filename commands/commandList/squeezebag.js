@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
 module.exports = {
     name: 'squeezebag',
-    description: 'SqueezeBag.',
+    description: 'Summon increasingly powerful squeezebags of the colors: white, red, green, blue, purple, and black, in increasing order of cost and reward. Use the -tithe flag to skip the confirmation message.',
+    example: '$squeezebag blue or $squeezebag blue -tithe',
     async execute(p) {
         if (p.args[0] != 'classic' && p.msg.channel.id != '827678508788613171' && p.msg.channel.id != '839354295999791135' && p.msg.channel.id != '819963117148700692' && p.msg.channel.id != '842569042647973888') {
             await p.msg.delete();

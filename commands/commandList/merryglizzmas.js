@@ -2,6 +2,8 @@ module.exports = {
     name: 'merryglizzmas',
     aliases: ['merryglizmas', 'fucc ya santa'],
     description: 'Merry Glizzmas!.',
+    permissions: 'ADMINISTRATOR',
+    hidden: true,
     async execute(p) {
         const user = await p.getAuthor();
 

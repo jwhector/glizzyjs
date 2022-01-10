@@ -2,6 +2,7 @@ module.exports = {
     name: 'question',
     aliases: ['q'],
     description: 'Temp: pose a question..',
+    hidden: true,
     async execute(p) {
         const question = new (require('../../misc/Questions'))(p.gobbler);
         await question.findOld();

@@ -3,6 +3,7 @@ module.exports = {
     name: 'balance',
     aliases: ['b', 'bal'],
     description: 'Get another user\'s glizzy balance.',
+    hidden: true,
     async execute(p) {
         const name = p.args[0].toLowerCase();
         let user = p.msg.guild.members.cache.find(member => member.displayName.toLowerCase() === name);

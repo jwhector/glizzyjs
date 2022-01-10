@@ -2,26 +2,22 @@ class Challenges {
     constructor(gobbler) {
         this.gobbler = gobbler;
         this.channel_id = '836785114313916479';
-        // bot-ideas channel
-        // this.channel_id = '841570603253497856';
         this.emote_id = '836758303568560148';
     }
 
     async printEntries() {
         const entries = await this.getEntries();
-        // console.log(entries);
         this.roundUp();
     }
 
+    // Count votes and assign winner. Gives XP to all participants.
     async roundUp() {
         const channel = this.gobbler.client.guilds.cache.first().channels.cache.get(this.channel_id);
         const entries = await this.getEntries();
         let max = 0;
         let most_popular;
         for (const [key, entry] of entries) {
-            // console.log(entry);
             const react = entry.reactions.cache.get(this.emote_id);
-            // console.log(react);
             const db_user = await this.gobbler.users.findUser(entry.author.id, this.gobbler.client);
             if (react) {
                 db_user.challenge_votes_received += react.count;
@@ -33,7 +29,6 @@ class Challenges {
                 await db_user.user_xp.addXp(db_user, 'xp_daily', 25 + 3 * react.count);
                 await db_user.user_xp.addXp(db_user, 'xp_weekly', 25 + 3 * react.count);
                 const count = react.count;
-                // console.log(entry.author, ' ', count);
                 if (count > max) {
                     max = count;
                     most_popular = entry;
@@ -79,6 +74,7 @@ class Challenges {
         }
     }
 
+    // Find entries in the CotD 24 hour period.
     async getEntries() {
         const channel = this.gobbler.client.guilds.cache.first().channels.cache.get(this.channel_id);
         const now = new Date();
@@ -89,6 +85,7 @@ class Challenges {
         return entries;
     }
 
+    // Count the number of times the current user has already voted today.
     async getVotes(userId) {
         let count;
         const entries = await this.getEntries();
@@ -106,11 +103,11 @@ class Challenges {
                     }
                 });
             }
-            // console.log(count);
         }
         return count;
     }
 
+    // Check entries and handle if a user submits more than once.
     async checkDuplicates(message) {
         const entries = await this.getEntries();
         if (entries.filter(msg => msg.author === message.author).size > 1) {
@@ -124,11 +121,17 @@ class Challenges {
         }
     }
 
+    // Check to see if message is in CotD.
     async messageHandler(msg) {
         if (msg.channel.id != this.channel_id) return;
         await this.checkDuplicates(msg);
     }
 
+    /* Check if reaction is in CotD.
+    * If so, check to see if the user is voting for themselves.
+    * If not, count how many times the user has voted and if that exceeds their limit.
+    * If not, adds XP and increments the 'challenge_votes' column in the database.
+    */
     async reactionHandler(reaction, user) {
         if (reaction.message.channel.id != this.channel_id) return;
         if (reaction.message.author.id === user.id) {
@@ -139,12 +142,10 @@ class Challenges {
         }
         try {
             const votes = await this.getVotes(user.id);
-            // console.log('FINAL VOTES: ' + votes);
             const db_user = await this.gobbler.users.findUser(user.id, this.gobbler.client);
             let allowedVotes = 2;
             if (db_user.level >= 70) allowedVotes = 4;
             else if (db_user.level < 70 && db_user.level >= 40) allowedVotes = 3;
-            // console.log(db_user.name, db_user.levelallowedVotes);
             if (db_user.challenge_votes < allowedVotes) {
                 await this.gobbler.users.addXp(db_user, 15);
                 await db_user.user_xp.addXp(db_user, 'cotdXp_daily', 15);

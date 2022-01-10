@@ -5,9 +5,12 @@ module.exports = async (reaction, user, gobbler) => {
         await reaction.message.channel.send('You cannot highlight your own message!');
         return;
     }
+    // Get user and message from MySQL database. Need to modify glizzys and 
+    // add the message to the list of messages that have been highlighted before.
     const db_user = await gobbler.users.findUser(user.id, gobbler.client);
     const db_msg = await gobbler.messages.findOne({ where: { _id: `${reaction.message.id}` } });
-    // console.log('DB MSG: ' + db_msg);
+    
+    // If the message is not found in the list of already-highlighted messages.
     if (!db_msg || !db_msg.highlight) {
         const isFree = db_user.free_highlights > 0;
 
@@ -21,7 +24,6 @@ module.exports = async (reaction, user, gobbler) => {
             const filter = (react, react_user) => react.emoji.id === '821597288652603443' && react_user.id === db_user.user_id;
             await confirmation.awaitReactions(filter, { time: 60000, maxEmojis: 1 }).then(async (collected) => {
                 if (!collected.size) return;
-                // const highlight = new Highlight(msg.author, this.user, msg);
                 db_user.highlights_given += 1;
                 await db_user.save();
                 await gobbler.users.addXp(db_user, 25);
@@ -79,8 +81,6 @@ async function constructEmbeds(author, gifter, message) {
     await send(embed, message);
 
     if (message.attachments.size) {
-        // console.log(message.attachments);
-        // console.log('ATTACHED');
         const attachment_embed = new Discord.MessageEmbed().setColor(color);
         const attachment_ext = message.attachments.first().url.slice(-3);
         if (attachment_ext === 'jpg' || attachment_ext === 'png') {

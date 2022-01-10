@@ -1,6 +1,7 @@
 module.exports = {
     name: 'roles',
     description: 'See and set available functional roles.',
+    hidden: true,
     async execute(p) {
         const roles = require('../utils/roles.json');
         let msg = '```\n';

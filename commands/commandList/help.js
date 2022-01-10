@@ -15,7 +15,7 @@ module.exports = {
         for (const file of commandFiles) {
             const command = require(`./${file}`);
             if (Object.keys(command).length) {
-                const description = command.description.concat(command.aliases ? '\n Aliases: '.concat(command.aliases) : '');
+                const description = command.description.concat(command.example ? '\n Example: '.concat(command.example) : '').concat(command.aliases ? '\n Aliases: '.concat(command.aliases) : '');
                 if (!command.hidden) {
                     embed.addField('$'.concat(command.name), `${description}`);
                 }

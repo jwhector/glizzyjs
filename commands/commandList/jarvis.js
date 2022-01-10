@@ -2,6 +2,7 @@
 module.exports = {
     name: 'jarvis',
     description: 'Summon Jarvis.',
+    example: '$jarvis I mean Mommy..',
     async execute(p) {
         createImage(p);
     },
