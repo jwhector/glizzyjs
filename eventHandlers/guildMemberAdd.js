@@ -1,5 +1,5 @@
 exports.handle = async function(guildMember) {
-    if (msg.author.bot) return;
+    if (message.author.bot) return;
     
     member.guild.channels.get('819963117148700692').send({ embed : {
         color: ('#1433A6'),
