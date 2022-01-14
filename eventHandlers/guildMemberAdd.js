@@ -1,8 +1,8 @@
 exports.handle = async function(guildMember) {
-    member.guild.channels.get('819963117148700692').send({ embed : {
+    guildMember.guild.channels.get('819963117148700692').send({ embed : {
         color: ('#1433A6'),
         title: "Welcome!",
-        description: "Welcome to deez " + member.user.username + " nutz gottem",
+        description: "Welcome to deez " + guildMember.user.username + " nutz gottem",
         fields: [{ 
             name: "Glizzard Entertainment",
             value: "We are gamers/coders/doctors/artists, and so much more! We hope you stay with us and have a wonderful time and become part of our little family! :)"
