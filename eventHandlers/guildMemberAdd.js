@@ -1,5 +1,5 @@
 exports.handle = async function(guildMember) {
-    guild.channels.get('819963117148700692').send({ embed : {
+    guild.channels.cache.get('819963117148700692').send({ embed : {
         color: ('#1433A6'),
         title: "Welcome!",
         description: "Welcome to deez " + guildMember.user.username + " nutz gottem",
