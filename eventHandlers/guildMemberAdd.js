@@ -1,5 +1,5 @@
 exports.handle = async function(guildMember) {
-    guild.channels.cache.get('819963117148700692').send({ embed : {
+    guildMember.guild.channels.cache.get('803533364086571068').send({ embed : {
         color: ('#1433A6'),
         title: "Welcome!",
         description: "Welcome to deez " + guildMember.user.username + " nutz gottem",
@@ -7,9 +7,9 @@ exports.handle = async function(guildMember) {
             name: "Glizzard Entertainment",
             value: "We are gamers/coders/doctors/artists, and so much more! We hope you stay with us and have a wonderful time and become part of our little family! :)"
         }],
-        timestamp: newDate(),
+        timestamp: Date.now(),
         footer: {
-            icon_url: client.user.avatarURL,
+            icon_url: guildMember.user.avatarURL,
             text: "© Glizzard Entertainment 2020 - The Future"
         }
     }});    
