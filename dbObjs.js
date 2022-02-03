@@ -1,7 +1,8 @@
 const Sequelize = require('sequelize');
 // const Discord = require('discord.js');
 
-const sequelize = new Sequelize('mysql://customer_203824_glizzys:GlizzyGalaxy69!@na05-sql.pebblehost.com/customer_203824_glizzys');
+const sequelize = new Sequelize('mysql://etmmo9cq1i7wcuxy:ljdkb0t5opdyf203@ble5mmo2o5v9oouq.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/mvo1v5e3xb80zwhk');
+// const sequelize = new Sequelize('mysql://customer_203824_glizzys:GlizzyGalaxy69!@na05-sql.pebblehost.com/customer_203824_glizzys');
 
 const Users = require('./models/Users')(sequelize, Sequelize.DataTypes);
 const Exchange = require('./models/Exchange')(sequelize, Sequelize.DataTypes);
