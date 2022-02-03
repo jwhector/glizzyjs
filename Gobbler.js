@@ -30,8 +30,8 @@ class Gobbler {
 		this.questions = new (require('./misc/Questions'))(this);
 		this.questions.findOld();
 
-		this.tournament = new (require('./misc/Tournament'))(this);
-		this.tournament.assignRoles();
+		// this.tournament = new (require('./misc/Tournament'))(this);
+		// this.tournament.assignRoles();
 
 		this.command = new (require('./commands/command'))(this);
 	}
