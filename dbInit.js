@@ -17,7 +17,7 @@ Users.sync({ alter: true }).then(async () => {
 		console.log('Authenticated!');
 	} catch (error) {
 		console.error('Unable to connect:', error);
-	} 
+	}
 }).catch(console.error);
 
 // sequelize.sync();

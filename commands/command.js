@@ -8,7 +8,7 @@ class Command {
 		const commandMsg = checkPrefix(this.gobbler, msg, this.commands);
 		if (!commandMsg) return;
 
-		console.log('EXECUTE');
+		// console.log('EXECUTE');
 
 		const command = this.commands.get(commandMsg.command);
 
