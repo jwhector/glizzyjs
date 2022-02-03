@@ -153,3 +153,5 @@ typings/
 .fusebox/
 
 old
+
+backup.sql
