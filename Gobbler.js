@@ -27,8 +27,8 @@ class Gobbler {
 
 		this.messageHandler = new (require('./utils/MessageHandler'))(this);
 
-		this.questions = new (require('./misc/Questions'))(this);
-		this.questions.findOld();
+		// this.questions = new (require('./misc/Questions'))(this);
+		// this.questions.findOld();
 
 		// this.tournament = new (require('./misc/Tournament'))(this);
 		// this.tournament.assignRoles();
