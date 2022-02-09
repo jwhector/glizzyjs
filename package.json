@@ -16,11 +16,17 @@
     "discord-reply": "^0.1.2",
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
-    "eslint": "^7.23.0",
     "mysql2": "^2.2.5",
     "pg": "^8.5.1",
     "pg-hstore": "^2.3.3",
     "sequelize": "^6.6.2"
   },
-  "nodeVersion": "12.16.3"
+  "nodeVersion": "12.16.3",
+  "devDependencies": {
+    "eslint": "^8.8.0",
+    "eslint-config-esnext": "^4.1.0",
+    "eslint-config-node": "^4.1.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-react": "^7.28.0"
+  }
 }
