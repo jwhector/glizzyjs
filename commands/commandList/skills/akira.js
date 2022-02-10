@@ -1,8 +1,6 @@
-import { Octokit } from '@octokit/core';
-
 module.exports = {
 	name: 'akira',
-  aliases: ['🐕'],
+	aliases: ['🐕'],
 	description: 'Dog.',
 
 	async execute(p) {
@@ -21,5 +19,5 @@ module.exports = {
 };
 
 function randomizer(max) {
-  return Math.floor(Math.random() * (max - 1));
+	return Math.floor(Math.random() * (max - 1));
 }
