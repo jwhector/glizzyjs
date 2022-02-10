@@ -6,7 +6,7 @@ module.exports = {
 	description: 'Dog.',
 
 	async execute(p) {
-		const path = 'pics/akira';
+		const path = 'pics/pets/akira';
 		const branch = '?ref=' + process.env.BRANCH;
 		const yungBankInfo = 99754494325186560;
 

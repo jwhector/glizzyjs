@@ -5,7 +5,7 @@ module.exports = {
 	description: 'Cat.',
 
 	async execute(p) {
-		const path = 'pics/mocha';
+		const path = 'pics/pets/mocha';
 		const branch = '?ref=' + process.env.BRANCH;
 
 		const response = await axios.get(`https://api.github.com/repos/jwhector/glizzyjs/contents/${path}${branch}`);
