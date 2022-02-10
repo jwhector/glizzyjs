@@ -5,7 +5,7 @@ module.exports = {
 	description: 'Cat.',
 
 	async execute(p) {
-		const path = 'pics/mocha'
+		const path = 'pics/mocha';
 		const branch = '?ref=' + process.env.BRANCH;
 
 		const response = await axios.get(`https://api.github.com/repos/jwhector/glizzyjs/contents/${path}${branch}`);
@@ -13,7 +13,7 @@ module.exports = {
 		const files = response.data;
 		const fileID = randomizer(files.length);
 		const chosenFile = files[fileID];
-		const pic = chosenFile.download_url
+		const pic = chosenFile.download_url;
 
 		await p.send(pic);
 		// const db_user = await p.getAuthor();

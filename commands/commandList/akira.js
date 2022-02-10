@@ -6,19 +6,20 @@ module.exports = {
 	description: 'Dog.',
 
 	async execute(p) {
-		const path = 'pics/akira'
+		const path = 'pics/akira';
 		const branch = '?ref=' + process.env.BRANCH;
+		const yungBankInfo = 99754494325186560;
 
 		const response = await axios.get(`https://api.github.com/repos/jwhector/glizzyjs/contents/${path}${branch}`);
 
 		const files = response.data;
 		const fileID = randomizer(files.length);
 		const chosenFile = files[fileID];
-		const pic = chosenFile.download_url
+		const pic = chosenFile.download_url;
 
 		await p.send(pic);
 		await p.gobbler.users.addGlizzys(p.author.id, -10);
-		await p.gobbler.users.addGlizzys(99754494325186560, +10)
+		await p.gobbler.users.addGlizzys(yungBankInfo, +10);
 	},
 };
 
