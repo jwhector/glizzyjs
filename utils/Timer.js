@@ -15,13 +15,13 @@ class Timer {
 		this.intervals();
 	}
 
+	// Adds users to a map when they send a message. Gives glizzys every separate minute they post.
 	async set(message) {
 		const author_id = message.author.id;
 		if (!this.time_map.has(author_id)) {
 			this.time_map.set(author_id, Date.now());
 			const glizzys = Math.floor(Math.random() * 3) + 2;
 			await this.gobbler.users.addGlizzys(author_id, glizzys);
-			console.log('Given!');
 		} else {
 			const time = this.time_map.get(author_id);
 			const diff = Date.now() - time;
@@ -29,11 +29,11 @@ class Timer {
 			if (diff >= 60000) {
 				await this.gobbler.users.addGlizzys(author_id, glizzys);
 				this.time_map.set(author_id, Date.now());
-				console.log('Given!');
 			}
 		}
 	}
 
+	
 	calculate_daily() {
 		const date = new Date(Date.now());
 		const hour = date.getHours();

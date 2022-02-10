@@ -4,13 +4,8 @@ const Sequelize = require('sequelize');
 const sequelize = new Sequelize('mysql://customer_203824_glizzys:GlizzyGalaxy69!@na05-sql.pebblehost.com/customer_203824_glizzys', { logging: false });
 
 const Users = require('./Users')(sequelize, Sequelize.DataTypes);
-const Exchange = require('./Exchange')(sequelize, Sequelize.DataTypes);
-const UserItems = require('./UserItems')(sequelize, Sequelize.DataTypes);
-const Items = require('./Items')(sequelize, Sequelize.DataTypes);
 const Messages = require('./Messages')(sequelize, Sequelize.DataTypes);
 const UserXp = require('./UserXp')(sequelize, Sequelize.DataTypes);
-// const UserItems = require('../models/UserItems')(sequelize, Sequelize.DataTypes);
-// const Bets = require('./models/Bets')(sequelize, Sequelize.DataTypes);
 
 // UserItems.belongsTo(Users);
 
@@ -70,36 +65,6 @@ Users.addXp = async function(db_user, amt) {
 	}
 };
 
-UserItems.addItem = async function(user, item_name, amount) {
-	console.log(item_name);
-	const item = await UserItems.findOne({
-		where: { item_name },
-	});
-
-	if (item) {
-		item.amount += amount;
-		return item.save();
-	} 
-	const itemEntry = await Items.findOne({
-		where: { item_name },
-	});
-	if (!itemEntry) {
-		console.error('There is no such item!');
-		return;
-	}
-	const cleanName = user.username.replace(/[^0-9A-Z]+/gi,'');
-	const newItem = await UserItems.create({
-		user_id: user.id,
-		user_name: cleanName,
-		item_name,
-		amount,
-		item_id: itemEntry.item_id,
-	});
-
-	return newItem;
-    
-};
-
 UserXp.prototype.addXp = async function(db_user, col, amt) {
 	// console.log('ID: ' + db_user.user_id + ' COL: ' + col);
 	const userXp = await UserXp.findOne({
@@ -122,12 +87,6 @@ UserXp.prototype.addXp = async function(db_user, col, amt) {
 exports.Users = Users;
 
 exports.sequelize = sequelize;
-
-exports.Exchange = Exchange;
-
-exports.Items = Items;
-
-exports.UserItems = UserItems;
 
 exports.Messages = Messages;
 
