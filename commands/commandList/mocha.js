@@ -1,28 +1,28 @@
-/* eslint-disable no-unused-vars */
+const axios = require('axios').default;
 
 module.exports = {
-    name: 'mocha',
-    description: 'Cat.',
-    async execute(p) {
-        const mochaFolder = './pics/mocha';
-        const fs = require('fs');
-        fs.readdir(mochaFolder, async (err, files) => {
-            // files.forEach(file => {
-            //     console.log(file);
-            // });
-            // console.log(files);
-            const idx = Math.floor(Math.random() * (files.length - 1));
-            const chosenPic = files[idx];
+	name: 'mocha',
+	description: 'Cat.',
 
-            // console.log(chosenPic);
+	async execute(p) {
+		const path = 'pics/mocha';
+		const branch = '?ref=' + process.env.BRANCH;
 
-            const pic = fs.readFileSync('./pics/mocha/' + chosenPic);
+		const response = await axios.get(`https://api.github.com/repos/jwhector/glizzyjs/contents/${path}${branch}`);
 
-            await p.send({ files: [pic] });
+		const files = response.data;
+		const fileID = randomizer(files.length);
+		const chosenFile = files[fileID];
+		const pic = chosenFile.download_url;
 
-            // const db_user = await p.getAuthor();
-            await p.gobbler.users.addGlizzys(p.author.id, -5);
-
-        })
-    },
+		await p.send(pic);
+		// const db_user = await p.getAuthor();
+		await p.gobbler.users.addGlizzys(p.author.id, -5);
+		// await p.gobbler.users.addGlizzys()
+		// IDEA: pay the animal owner when someone else fetches a picture of their pet
+	},
 };
+
+function randomizer(max) {
+  return Math.floor(Math.random() * (max - 1));
+}
