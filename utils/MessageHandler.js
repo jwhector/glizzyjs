@@ -2,7 +2,6 @@ class MessageHandler {
 	constructor(gobbler) {
 		this.gobbler = gobbler;
 		this.count = 0;
-		// this.challenges = new (require('./Challenges'))(gobbler);
 		this.challenges = gobbler.challenges;
 		this.cooldowns = {};
 	}
@@ -17,16 +16,18 @@ class MessageHandler {
 
 		this.gobbler.timer.set(message);
 
-		// this.gobbler.users.addXp(message);
-		const db_user = await this.gobbler.users.findUser(message.author.id, this.gobbler.client);
-		await db_user.increment('text_posts_daily', { by: 1 });
-		const xpGained = calculateXp(db_user.text_posts_daily + 1, 25);
-		await this.gobbler.users.addXp(db_user, xpGained);
-		await db_user.user_xp.addXp(db_user, 'textXp_daily', xpGained);
-		await db_user.user_xp.addXp(db_user, 'textXp_weekly', xpGained);
-		await db_user.user_xp.addXp(db_user, 'xp_daily', xpGained);
-		await db_user.user_xp.addXp(db_user, 'xp_weekly', xpGained);
-		// console.log(db_user.UserXp);
+		try {
+			const db_user = await this.gobbler.users.findUser(message.author.id, this.gobbler.client);
+			await db_user.increment('text_posts_daily', { by: 1 });
+			const xpGained = calculateXp(db_user.text_posts_daily + 1, 25);
+			await this.gobbler.users.addXp(db_user, xpGained);
+			await db_user.user_xp.addXp(db_user, 'textXp_daily', xpGained);
+			await db_user.user_xp.addXp(db_user, 'textXp_weekly', xpGained);
+			await db_user.user_xp.addXp(db_user, 'xp_daily', xpGained);
+			await db_user.user_xp.addXp(db_user, 'xp_weekly', xpGained);
+		} catch (err) {
+			console.error(err);
+		}
 
 		this.challenges.messageHandler(message);
 	}
@@ -98,7 +99,6 @@ async function ggEz(message) {
 }
 
 function calculateXp(num, factor) {
-	// console.log( factor / num ** 1.3 );
 	return factor / num ** 1.3;
 }
 
