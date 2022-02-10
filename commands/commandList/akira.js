@@ -17,7 +17,8 @@ module.exports = {
 		const pic = chosenFile.download_url
 
 		await p.send(pic);
-		await p.gobbler.users.addGlizzys(p.author.id, -5);
+		await p.gobbler.users.addGlizzys(p.author.id, -10);
+		await p.gobbler.users.addGlizzys(99754494325186560, +10)
 	},
 };
 
