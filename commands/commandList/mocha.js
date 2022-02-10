@@ -2,6 +2,7 @@ const axios = require('axios').default;
 
 module.exports = {
 	name: 'mocha',
+	aliases: ['🐈‍⬛'],
 	description: 'Cat.',
 
 	async execute(p) {
@@ -16,10 +17,6 @@ module.exports = {
 		const pic = chosenFile.download_url;
 
 		await p.send(pic);
-		// const db_user = await p.getAuthor();
-		await p.gobbler.users.addGlizzys(p.author.id, -5);
-		// await p.gobbler.users.addGlizzys()
-		// IDEA: pay the animal owner when someone else fetches a picture of their pet
 	},
 };
 

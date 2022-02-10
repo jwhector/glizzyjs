@@ -8,7 +8,6 @@ module.exports = {
 	async execute(p) {
 		const path = 'pics/pets/akira';
 		const branch = '?ref=' + process.env.BRANCH;
-		const yungBankInfo = 99754494325186560;
 
 		const response = await axios.get(`https://api.github.com/repos/jwhector/glizzyjs/contents/${path}${branch}`);
 
@@ -18,11 +17,9 @@ module.exports = {
 		const pic = chosenFile.download_url;
 
 		await p.send(pic);
-		await p.gobbler.users.addGlizzys(p.author.id, -10);
-		await p.gobbler.users.addGlizzys(yungBankInfo, +10);
 	},
 };
 
 function randomizer(max) {
-	return Math.floor(Math.random() * (max - 1));
+	return Math.floor(Math.random() * max);
 }
