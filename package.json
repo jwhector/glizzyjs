@@ -10,6 +10,7 @@
   "author": "Jared Hector",
   "license": "ISC",
   "dependencies": {
+    "@octokit/core": "^3.5.1",
     "@stdlib/stdlib": "0.0.94",
     "axios": "^0.21.1",
     "canvas": "^2.8.0",
