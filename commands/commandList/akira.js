@@ -1,20 +1,23 @@
+import axios from 'axios';
+
 module.exports = {
 	name: 'akira',
   aliases: ['🐕'],
 	description: 'Dog.',
 
 	async execute(p) {
-		const akiraDir = './pics/akira';
-		const fs = require('fs');
+		const path = 'pics/akira'
+		const branch = '?ref=' + process.env.BRANCH;
 
-		fs.readdir(akiraDir, async(err, files) => {
-			const picID = randomizer(files.length);
-			const chosenPic = files[picID];
-			const pic = fs.readFileSync(akiraDir + chosenPic);
+		const response = await axios.get(`https://api.github.com/repos/jwhector/glizzyjs/contents/${path}${branch}`);
 
-			await p.send({files:[pic]});
-			await p.gobbler.users.addGlizzys(p.author.id, -5);
-		});
+		const files = response.data;
+		const fileID = randomizer(files.length);
+		const chosenFile = files[fileID];
+		const pic = chosenFile.download_url
+
+		await p.send(pic);
+		await p.gobbler.users.addGlizzys(p.author.id, -5);
 	},
 };
 

@@ -1,28 +1,28 @@
-/* eslint-disable no-unused-vars */
+import axios from 'axios';
 
 module.exports = {
 	name: 'mocha',
 	description: 'Cat.',
+
 	async execute(p) {
-		const mochaFolder = './pics/mocha';
-		const fs = require('fs');
-		fs.readdir(mochaFolder, async (err, files) => {
-			// files.forEach(file => {
-			//     console.log(file);
-			// });
-			// console.log(files);
-			const idx = Math.floor(Math.random() * (files.length - 1));
-			const chosenPic = files[idx];
+		const path = 'pics/mocha'
+		const branch = '?ref=' + process.env.BRANCH;
 
-			// console.log(chosenPic);
+		const response = await axios.get(`https://api.github.com/repos/jwhector/glizzyjs/contents/${path}${branch}`);
 
-			const pic = fs.readFileSync('./pics/mocha/' + chosenPic);
+		const files = response.data;
+		const fileID = randomizer(files.length);
+		const chosenFile = files[fileID];
+		const pic = chosenFile.download_url
 
-			await p.send({ files: [pic] });
-
-			// const db_user = await p.getAuthor();
-			await p.gobbler.users.addGlizzys(p.author.id, -5);
-
-		});
+		await p.send(pic);
+		// const db_user = await p.getAuthor();
+		await p.gobbler.users.addGlizzys(p.author.id, -5);
+		// await p.gobbler.users.addGlizzys()
+		// IDEA: pay the animal owner when someone else fetches a picture of their pet
 	},
 };
+
+function randomizer(max) {
+  return Math.floor(Math.random() * (max - 1));
+}
