@@ -14,9 +14,16 @@ module.exports = {
 		const files = response.data;
 		const fileID = randomizer(files.length);
 		const chosenFile = files[fileID];
-		const pic = chosenFile.download_url;
+		const imgURL = chosenFile.download_url;
 
-		await p.send(pic);
+		const response = await fetch(picURL);
+		const imgBlob = await response.blob();
+		const reader = new FileReader();
+		reader.readAsDataURL(imgBlob);
+		reader.onloadend = () => {
+			const base64data = reader.result;
+			await p.send(base64data);
+		}
 	},
 };
 
