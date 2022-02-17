@@ -78,3 +78,6 @@ typings/
 .fusebox/
 old
 backup.sql
+
+# MacOS Garbage Files
+.DS_Store
