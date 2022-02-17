@@ -16,7 +16,7 @@ module.exports = {
 		const chosenFile = files[fileID];
 		const imgURL = chosenFile.download_url;
 
-		const response = await fetch(picURL);
+		const response = await fetch(imgURL);
 		const imgBlob = await response.blob();
 		const reader = new FileReader();
 		reader.readAsDataURL(imgBlob);
