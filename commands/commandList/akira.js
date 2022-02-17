@@ -9,15 +9,15 @@ module.exports = {
 		const path = 'pics/pets/akira';
 		const branch = '?ref=' + process.env.BRANCH;
 
-		const response = await axios.get(`https://api.github.com/repos/jwhector/glizzyjs/contents/${path}${branch}`);
+		const fileResponse = await axios.get(`https://api.github.com/repos/jwhector/glizzyjs/contents/${path}${branch}`);
 
-		const files = response.data;
+		const files = fileResponse.data;
 		const fileID = randomizer(files.length);
 		const chosenFile = files[fileID];
 		const imgURL = chosenFile.download_url;
 
-		const response = await fetch(imgURL);
-		const imgBlob = await response.blob();
+		const imgResponse = await fetch(imgURL);
+		const imgBlob = await imgResponse.blob();
 		const reader = new FileReader();
 		reader.readAsDataURL(imgBlob);
 		reader.onloadend = () => {
