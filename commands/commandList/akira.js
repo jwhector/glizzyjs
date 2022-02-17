@@ -21,7 +21,8 @@ module.exports = {
 			.then(response => Buffer.from(response.data, 'binary')
 				.toString('base64'));
 
-		await p.send(base64data);
+		await p.send({ files: [{ attachment: base64data, name: chosenFile.name }] });
+		// await p.send(base64data);
 	},
 };
 
