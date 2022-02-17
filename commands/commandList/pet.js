@@ -21,9 +21,9 @@ module.exports = {
 		const files = res2.data;
 		const fileID = randomizer(files.length);
 		const chosenFile = files[fileID];
-		const pic = chosenFile.download_url;
+		const imgURL = chosenFile.download_url;
 
-		await p.send(pic);
+		await p.send({ files: [{ attachment: imgURL }] });
 	},
 };
 
