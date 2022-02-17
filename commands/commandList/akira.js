@@ -16,12 +16,11 @@ module.exports = {
 		const chosenFile = files[fileID];
 		const imgURL = chosenFile.download_url;
 
-		// const base64data = await axios
-		// 	.get(imgURL, { responseType: 'arraybuffer' })
-		// 	.then(response => Buffer.from(response.data, 'binary')
-		// 		.toString('base64'));
+		const base64data = await axios
+			.get(imgURL, { responseType: 'arraybuffer' })
+			.then(response => Buffer.from(response.data, 'binary'));
 
-		await p.send({ files: [{ attachment: imgURL }] });
+		await p.send({ files: [{ attachment: base64data }] });
 		// await p.send(base64data);
 	},
 };
