@@ -16,14 +16,12 @@ module.exports = {
 		const chosenFile = files[fileID];
 		const imgURL = chosenFile.download_url;
 
-		const imgResponse = await axios.get(imgURL);
-		const imgBlob = await imgResponse.blob();
-		const reader = new FileReader();
-		reader.readAsDataURL(imgBlob);
-		reader.onloadend = async () => {
-			const base64data = reader.result;
-			await p.send(base64data);
-		}
+		const base64data = await axios
+			.get(imgURL, { responseType: 'arraybuffer' })
+			.then(response => Buffer.from(response.data, 'binary')
+			.toString('base64'));
+
+		await p.send(base64data)
 	},
 };
 
