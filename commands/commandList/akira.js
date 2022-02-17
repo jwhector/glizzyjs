@@ -20,7 +20,7 @@ module.exports = {
 		const imgBlob = await imgResponse.blob();
 		const reader = new FileReader();
 		reader.readAsDataURL(imgBlob);
-		reader.onloadend = () => {
+		reader.onloadend = async () => {
 			const base64data = reader.result;
 			await p.send(base64data);
 		}
