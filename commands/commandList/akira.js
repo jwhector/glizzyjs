@@ -16,7 +16,7 @@ module.exports = {
 		const chosenFile = files[fileID];
 		const imgURL = chosenFile.download_url;
 
-		const imgResponse = await fetch(imgURL);
+		const imgResponse = await axios.get(imgURL);
 		const imgBlob = await imgResponse.blob();
 		const reader = new FileReader();
 		reader.readAsDataURL(imgBlob);
