@@ -19,9 +19,9 @@ module.exports = {
 		const base64data = await axios
 			.get(imgURL, { responseType: 'arraybuffer' })
 			.then(response => Buffer.from(response.data, 'binary')
-			.toString('base64'));
+				.toString('base64'));
 
-		await p.send(base64data)
+		await p.send(base64data);
 	},
 };
 
