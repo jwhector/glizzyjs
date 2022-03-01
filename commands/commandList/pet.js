@@ -11,12 +11,6 @@ module.exports = {
 		const res1 = await axios.get(`https://api.github.com/repos/jwhector/glizzyjs/contents/${path}${branch}`);
 
 		const directories = res1.data;
-		// const directories = [];
-		// for(item of response.data) {
-		//   if(item.type === 'dir') {
-		//     directories.push(item);
-		//   };
-		// };
 
 		const petID = randomizer(directories.length);
 		const pet = directories[petID];
@@ -27,10 +21,9 @@ module.exports = {
 		const files = res2.data;
 		const fileID = randomizer(files.length);
 		const chosenFile = files[fileID];
-		const pic = chosenFile.download_url;
+		const imgURL = chosenFile.download_url;
 
-		await p.send(pic);
-		await p.gobbler.users.addGlizzys(p.author.id, -5);
+		await p.send({ files: [{ attachment: imgURL }] });
 	},
 };
 
