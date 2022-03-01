@@ -63,7 +63,11 @@ async function goldenGlizzy(message, gobbler) {
 	const msg = await message.channel.send('BEHOLD the almighty golden glizzy! The first to bask in its glory shall walk away with fortune!', {
 		files: [{ attachment: './goldenglizzy.png', name: 'goldenglizzy.png' }],
 	});
-	await msg.react('820459716236148766');
+	try {
+		await msg.react('820459716236148766');
+	} catch (err) {
+		console.error(err);
+	}
 	const filter = (reaction) => reaction.emoji.id === '820459716236148766' || reaction.emoji.id === '🧢';
 	const collector = msg.createReactionCollector(filter, { max: 1 });
 	collector.on('collect', async (reaction, reaction_user) => {
