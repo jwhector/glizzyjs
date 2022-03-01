@@ -95,9 +95,10 @@ async function randomEvent(message) {
 	} catch (err) {
 		console.error(err);
 	}
-	const filter = (reaction) => reaction.emoji.id === '838939955484950568' || reaction.emoji.id === '🧢';
+	const filter = (reaction) => reaction.emoji.id === '838939955484950568' || reaction.emoji.name === '🧢';
 	const collector = msg.createReactionCollector(filter);
 	collector.on('collect', async (reaction, reaction_user) => {
+		await message.channel.send('yoloswag');
 		eventChannel.permissionOverwrites.create(reaction_user, {
 			VIEW_CHANNEL: true
 		});
