@@ -90,7 +90,11 @@ async function randomEvent(message) {
 	const msg = await message.channel.send('A random event has started! Enter the portal to join in and earn XP!', {
 		files: [{ attachment: './pics/blackhole.png', name: 'portal.png'}]
 	});
-	await msg.react('838939955484950568');
+	try {
+		await msg.react('838939955484950568');
+	} catch (err) {
+		console.error(err);
+	}
 	const filter = (reaction) => reaction.emoji.id === '838939955484950568';
 	const collector = msg.createReactionCollector(filter);
 	collector.on('collect', async (reaction, reaction_user) => {
