@@ -68,7 +68,7 @@ async function goldenGlizzy(message, gobbler) {
 	} catch (err) {
 		console.error(err);
 	}
-	const filter = (reaction) => reaction.emoji.id === '820459716236148766' || reaction.emoji.id === '🧢';
+	const filter = (reaction) => reaction.emoji.id === '820459716236148766';
 	const collector = msg.createReactionCollector(filter, { max: 1 });
 	collector.on('collect', async (reaction, reaction_user) => {
 		await message.channel.send(reaction_user.toString() + ' has claimed the Golden Glizzy! `150` glizzys and `25` xp have been added to your balance!');
@@ -95,7 +95,7 @@ async function randomEvent(message) {
 	} catch (err) {
 		console.error(err);
 	}
-	const filter = (reaction) => reaction.emoji.id === '838939955484950568';
+	const filter = (reaction) => reaction.emoji.id === '838939955484950568' || reaction.emoji.id === '🧢';
 	const collector = msg.createReactionCollector(filter);
 	collector.on('collect', async (reaction, reaction_user) => {
 		eventChannel.permissionOverwrites.create(reaction_user, {
