@@ -1,7 +1,7 @@
 class MessageHandler {
 	constructor(gobbler) {
 		this.gobbler = gobbler;
-		this.count = 0;
+		this.count = 495;
 		this.challenges = gobbler.challenges;
 		this.cooldowns = {};
 	}
@@ -10,6 +10,8 @@ class MessageHandler {
 		this.count += 1;
 		if (!(this.count % 200)) {
 			goldenGlizzy(message, this.gobbler);
+		} else if (!(this.count % 500)) {
+			await randomEvent(message);
 		}
 
 		await ggEz(message);
@@ -70,6 +72,27 @@ async function goldenGlizzy(message, gobbler) {
 		await gobbler.users.addGlizzys(user.user_id, 150);
 		await gobbler.users.addXp(user, 25);
 		await msg.delete();
+	});
+}
+
+async function randomEvent(message) {
+	const eventChannel = await message.guild.channels.create('Random event!', {
+		type: 'GUILD_TEXT',
+		permissionOverwrites: [{
+			id: message.guild.roles.everyone,
+			deny: ['VIEW_CHANNEL'],
+		}]
+	});
+	const msg = await message.channel.send('A random event has started! Enter the portal to join in and earn XP!', {
+		files: [{ attachment: './pics/blackhole.png', name: 'portal.png'}]
+	});
+	await msg.react('838939955484950568');
+	const filter = (reaction) => reaction.emoji.id === '838939955484950568';
+	const collector = msg.createReactionCollector(filter);
+	collector.on('collect', async (reaction, reaction_user) => {
+		eventChannel.permissionOverwrites.create(reaction_user, {
+			VIEW_CHANNEL: true
+		});
 	});
 }
 
