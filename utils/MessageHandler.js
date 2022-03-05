@@ -91,11 +91,11 @@ async function randomEvent(message) {
 		files: [{ attachment: './pics/blackhole.png', name: 'portal.png'}]
 	});
 	try {
-		await msg.react('838939955484950568');
+		await msg.react('☄️');
 	} catch (err) {
 		console.error(err);
 	}
-	const filter = (reaction) => reaction.emoji.id === '838939955484950568' || reaction.emoji.name === '🧢';
+	const filter = (reaction) => reaction.emoji.name === '☄️';
 	const collector = msg.createReactionCollector(filter);
 	collector.on('collect', async (reaction, reaction_user) => {
 		await message.channel.send('yoloswag');
