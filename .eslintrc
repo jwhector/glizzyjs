@@ -25,6 +25,7 @@
             "error",
             "always"
         ],
-        "import/no-commonjs" : "off"
+        "import/no-commonjs" : "off",
+        "import/no-nodejs-modules" : "off"
     }
 }

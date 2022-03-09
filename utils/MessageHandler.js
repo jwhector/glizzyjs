@@ -1,3 +1,6 @@
+// eslint-disable-next-line import/no-nodejs-modules
+const path = require('path');
+
 class MessageHandler {
 	constructor(gobbler) {
 		this.gobbler = gobbler;
@@ -11,7 +14,7 @@ class MessageHandler {
 		if (!(this.count % 200)) {
 			goldenGlizzy(message, this.gobbler);
 		} else if (!(this.count % 500)) {
-			const { randomEvent } = require('/app/games/randomevents');
+			const { randomEvent } = require(path.join(__dirname, '../games/randomevents.js'));
 			await randomEvent(message);
 		}
 

@@ -26,6 +26,7 @@ function getCommands() {
 	// eslint-disable-next-line no-path-concat
 	const commandFiles = fs.readdirSync(__dirname + '/commandList').filter(file => file.endsWith('.js'));
 
+	// eslint-disable-next-line no-unused-vars
 	for (const file of commandFiles) {
 		const command = require(`./commandList/${file}`);
 		commands.set(command.name, command);
