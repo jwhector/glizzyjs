@@ -16,7 +16,7 @@ async function randomEvent(message) {
 	}
     let numPlayers = 0;
 	const filter = (reaction) => reaction.emoji.name === '☄️';
-	const collector = msg.createReactionCollector({ filter, max: 1 });
+	const collector = msg.createReactionCollector(filter, { max: 1 });
 	collector.on('collect', async (reaction, reaction_user) => {
 		await message.channel.send('yoloswag');
 		eventChannel.updateOverwrite(reaction_user.id, {
@@ -50,7 +50,7 @@ class EmojiMatch {
 
         let readyCount = 0;
         const filter = (reaction) => reaction.emoji.name === '🔑';
-        const collector = readyMsg.createReactionCollector({ filter, time: 120000, max: 1 });
+        const collector = readyMsg.createReactionCollector(filter, { time: 120000, max: 1 });
         collector.on('collect', async (reaction, reaction_user) => {
             await this.eventChannel.send('yoloswag');
         });
