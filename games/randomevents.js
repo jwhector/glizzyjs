@@ -1,3 +1,5 @@
+var Promise = require('bluebird');
+
 async function randomEvent(message) {
 	const eventChannel = await message.guild.channels.create('Random event!', {
 		type: 'GUILD_TEXT',
