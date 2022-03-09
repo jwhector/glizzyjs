@@ -14,7 +14,7 @@ module.exports = {
 			const bags = new (require('../../utils/Squeezebags'))(p.gobbler);
 			await bags.squeeze(p.msg, p.args);
 		} else {
-			const author = await p.users.findUser(p.msg.author.id, p.client);
+			const author = await p.users.findUser(p.author);
 			const bag = await p.msg.channel.send('💰');
 			await p.msg.channel.send('A bag has been summoned for squeezing!');
     
@@ -36,8 +36,8 @@ module.exports = {
     
 					if (num === 4) {
 						const user = r.users.cache.first();
-						const db_user = await p.users.findUser(user.id, bag.client);
-						p.users.addGlizzys(db_user.user_id, 150);
+						// const db_user = await p.users.findUser(user);
+						p.users.addGlizzys(user, 150);
 						await bag.channel.send(user.toString() + ', `150` glizzys have been added to your balance!');
 					}
     

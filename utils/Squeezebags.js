@@ -31,7 +31,7 @@ class Squeezebags {
 
 	async squeeze(message, args) {
 
-		const author = await this.gobbler.users.findUser(message.author.id);
+		const author = await this.gobbler.users.findUser(message.author);
 
 		// const member = message.guild.members.cache.get(message.author.id);
 
@@ -129,7 +129,7 @@ class Squeezebags {
 
 					}
 
-					await this.gobbler.users.addGlizzys(author.user_id, -bag.cost);
+					await this.gobbler.users.addGlizzys(message.author, -bag.cost);
 
 					await this.summon(message, args, bag, author);
 

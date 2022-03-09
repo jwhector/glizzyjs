@@ -79,9 +79,9 @@ function initParams(msg, cmd, args, gobbler) {
 		'timer': gobbler.timer,
 	};
 
-	param.getAuthor = async () => await param.users.findUser(param.author.id, param.client);
+	param.getAuthor = async () => await param.users.findUser(param.author);
 
-	param.getUser = async (id) => await param.users.findUser(id, param.client);
+	param.getUser = async (user) => await param.users.findUser(user);
 
 	param.getMember = () => msg.guild.members.cache.get(param.author.id);
 

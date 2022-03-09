@@ -5,7 +5,7 @@ exports.handle = async function(msg) {
 
 	this.command.execute(msg);
 
-	const db_user = await this.users.findUser(msg.author.id, this.client);
+	const db_user = await this.users.findUser(msg.author);
 	db_user.text_posts += 1;
 	db_user.save();
 };

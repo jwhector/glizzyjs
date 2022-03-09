@@ -18,7 +18,7 @@ class Challenges {
 		// eslint-disable-next-line no-unused-vars
 		for (const [key, entry] of entries) {
 			const react = entry.reactions.cache.get(this.emote_id);
-			const db_user = await this.gobbler.users.findUser(entry.author.id, this.gobbler.client);
+			const db_user = await this.gobbler.users.findUser(entry.author);
 			if (react) {
 				db_user.challenge_votes_received += react.count;
 				db_user.challenge_posts += 1;
@@ -50,7 +50,7 @@ class Challenges {
 			await channel.send('There were multiple winners in today\'s contest!');
 			for (let i = 0; i < most_popular.length; i++) {
 				await channel.send(`${most_popular[i].author.toString()} is a winner in today's contest! \`250\` glizzys have been added to their balance.`);
-				const winner = await this.gobbler.users.findUser(most_popular[i].author.id, this.gobbler.client);
+				const winner = await this.gobbler.users.findUser(most_popular[i].author);
 				winner.challenge_wins += 1;
 				await winner.save();
 				await this.gobbler.users.addGlizzys(winner.user_id, 250);
@@ -62,10 +62,10 @@ class Challenges {
 			}
 		} else {
 			await channel.send(`${most_popular.author.toString()} won today's contest! \`250\` glizzys have been added to their balance.`);
-			const winner = await this.gobbler.users.findUser(most_popular.author.id, this.gobbler.client);
+			const winner = await this.gobbler.users.findUser(most_popular.author);
 			winner.challenge_wins += 1;
 			await winner.save();
-			await this.gobbler.users.addGlizzys(winner.user_id, 250);
+			await this.gobbler.users.addGlizzys(most_popular.author, 250);
 			await this.gobbler.users.addXp(winner, 75);
 			await winner.user_xp.addXp(winner, 'cotdXp_daily', 75);
 			await winner.user_xp.addXp(winner, 'cotdXp_weekly', 75);
@@ -144,7 +144,7 @@ class Challenges {
 		}
 		try {
 			const votes = await this.getVotes(user.id);
-			const db_user = await this.gobbler.users.findUser(user.id, this.gobbler.client);
+			const db_user = await this.gobbler.users.findUser(user);
 			let allowedVotes = 2;
 			if (db_user.level >= 70) allowedVotes = 4;
 			else if (db_user.level < 70 && db_user.level >= 40) allowedVotes = 3;

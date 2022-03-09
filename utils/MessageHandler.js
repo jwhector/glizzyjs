@@ -19,7 +19,7 @@ class MessageHandler {
 		this.gobbler.timer.set(message);
 
 		try {
-			const db_user = await this.gobbler.users.findUser(message.author.id, this.gobbler.client);
+			const db_user = await this.gobbler.users.findUser(message.author);
 			await db_user.increment('text_posts_daily', { by: 1 });
 			const xpGained = calculateXp(db_user.text_posts_daily + 1, 25);
 			await this.gobbler.users.addXp(db_user, xpGained);
@@ -39,8 +39,8 @@ class MessageHandler {
 			require('./highlight')(reaction, user, this.gobbler);
 		}
 
-		const db_author = await this.gobbler.users.findUser(reaction.message.author.id, this.gobbler.client);
-		const db_reactor = await this.gobbler.users.findUser(user.id, this.gobbler.client);
+		const db_author = await this.gobbler.users.findUser(reaction.message.author);
+		const db_reactor = await this.gobbler.users.findUser(user);
 		await this.gobbler.users.addXp(db_author, calculateXp(db_author.reacted_daily + 1, 12.5));
 		await this.gobbler.users.addXp(db_reactor, calculateXp(db_reactor.reacts_daily + 1, 12.5));
 		await db_reactor.user_xp.addXp(db_reactor, 'reactXp_daily', calculateXp(db_reactor.reacts_daily + 1, 12.5));
@@ -72,8 +72,8 @@ async function goldenGlizzy(message, gobbler) {
 	const collector = msg.createReactionCollector(filter, { max: 1 });
 	collector.on('collect', async (reaction, reaction_user) => {
 		await message.channel.send(reaction_user.toString() + ' has claimed the Golden Glizzy! `150` glizzys and `25` xp have been added to your balance!');
-		const user = await gobbler.users.findUser(reaction_user.id, message.client);
-		await gobbler.users.addGlizzys(user.user_id, 150);
+		const user = await gobbler.users.findUser(reaction_user);
+		await gobbler.users.addGlizzys(reaction_user, 150);
 		await gobbler.users.addXp(user, 25);
 		await msg.delete();
 	});

@@ -7,7 +7,7 @@ module.exports = {
 		console.log('Giving!');
 		const target = p.msg.mentions.users.first() || p.msg.author;
 		const amt = Number(p.args[1]);
-		await p.users.addGlizzys(target.id, amt);
+		await p.users.addGlizzys(target, amt);
 		p.send(`Gave \`${amt}\` glizzys to ` + target.toString() + '.');
 	},
 };

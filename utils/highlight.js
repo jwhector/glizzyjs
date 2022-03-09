@@ -7,7 +7,7 @@ module.exports = async (reaction, user, gobbler) => {
 	}
 	// Get user and message from MySQL database. Need to modify glizzys and 
 	// add the message to the list of messages that have been highlighted before.
-	const db_user = await gobbler.users.findUser(user.id, gobbler.client);
+	const db_user = await gobbler.users.findUser(user);
 	const db_msg = await gobbler.messages.findOne({ where: { _id: `${reaction.message.id}` } });
     
 	// If the message is not found in the list of already-highlighted messages.
@@ -36,13 +36,13 @@ module.exports = async (reaction, user, gobbler) => {
 					db_user.free_highlights -= 1;
 					await db_user.save();
 				} else {
-					await gobbler.users.addGlizzys(db_user.user_id, -1500);
+					await gobbler.users.addGlizzys(user, -1500);
 				}
-				await gobbler.users.findUser(msg.author.id, gobbler.client).then(async (author) => {
-					await gobbler.users.addGlizzys(author.user_id, 250);
+				await gobbler.users.findUser(msg.author).then(async (author) => {
+					await gobbler.users.addGlizzys(msg.author, 250);
 					await msg.channel.send(`${msg.author.toString()}, your post has been highlighted! You receive \`250\` glizzys as a reward!`);
 					author.highlights_received += 1;
-					author.save();
+					await author.save();
 				});
 			}).catch(console.error);
               

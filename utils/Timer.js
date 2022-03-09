@@ -21,13 +21,13 @@ class Timer {
 		if (!this.time_map.has(author_id)) {
 			this.time_map.set(author_id, Date.now());
 			const glizzys = Math.floor(Math.random() * 3) + 2;
-			await this.gobbler.users.addGlizzys(author_id, glizzys);
+			await this.gobbler.users.addGlizzys(message.author, glizzys);
 		} else {
 			const time = this.time_map.get(author_id);
 			const diff = Date.now() - time;
 			const glizzys = Math.floor(Math.random() * 3) + 2;
 			if (diff >= 60000) {
-				await this.gobbler.users.addGlizzys(author_id, glizzys);
+				await this.gobbler.users.addGlizzys(message.author, glizzys);
 				this.time_map.set(author_id, Date.now());
 			}
 		}
@@ -139,17 +139,17 @@ class Timer {
 		roundup.start();
 	}
 
-	async voiceConnect(id) {
-		if (this.inVoice.has(id)) return;
-		const user = await this.gobbler.users.findUser(id, this.gobbler.client);
-		this.inVoice.set(id, user.voiceGlizzys);
-		this.inVoiceTime.set(id, 0);
+	async voiceConnect(voiceState) {
+		if (this.inVoice.has(voiceState.id)) return;
+		const user = await this.gobbler.users.findUser(voiceState.member.user);
+		this.inVoice.set(voiceState.id, user.voiceGlizzys);
+		this.inVoiceTime.set(voiceState.id, 0);
 	}
 
-	async voiceDisconnect(id) {
-		const value = this.inVoice.get(id);
-		const time = this.inVoiceTime.get(id);
-		const user = await this.gobbler.users.findUser(id, this.gobbler.client);
+	async voiceDisconnect(voiceState) {
+		const value = this.inVoice.get(voiceState.id);
+		const time = this.inVoiceTime.get(voiceState.id);
+		const user = await this.gobbler.users.findUser(voiceState.member.user);
 		const voiceGlizzys = user.voiceGlizzys;
 		await user.increment('glizzys', { by: voiceGlizzys - value });
 		// user.glizzys = user.glizzys + user.voiceGlizzys - value;
@@ -163,8 +163,8 @@ class Timer {
 		await user.user_xp.addXp(user, 'voiceXp_weekly', (voiceGlizzys - value) / 3);
 		// user.time_in_voice += time;
 		// await user.save();
-		this.inVoice.delete(id);
-		this.inVoiceTime.delete(id);
+		this.inVoice.delete(voiceState.id);
+		this.inVoiceTime.delete(voiceState.id);
 	}
 
 	async intervals() {
@@ -199,13 +199,11 @@ async function decayXp() {
 	for (const user of users) {
 		const multiplier = 0.0186 * (1.4 ** (user.rep_level - 1));
 		const newXp = user.xp - multiplier;
-		// const levelThreshold = 150 * Math.ceil((user.xp / 150));
 		if (newXp > 0) {
 			const newLvl = Math.ceil(newXp / 150);
 			await user.decrement('xp', { by: multiplier });
 			await user.user_xp.addXp(user, 'decay_daily', multiplier);
 			await user.user_xp.addXp(user, 'decay_weekly', multiplier); 
-			// if (newXp < levelThreshold) await user.decrement('rep_level', { by: 1 });
 			if (newLvl < user.rep_level) {
 				await user.decrement('rep_level', { by: 1 });
 			}

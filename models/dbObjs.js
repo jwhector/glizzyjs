@@ -12,20 +12,20 @@ const UserXp = require('./UserXp')(sequelize, Sequelize.DataTypes);
 Users.hasOne(UserXp, { foreignKey: 'user_id' });
 UserXp.belongsTo(Users, { foreignKey: 'user_id' });
 
-Users.findUser = async function(target_id, client) {
-	const user = await Users.findOne({
-		where: { user_id: target_id },
+Users.findUser = async function(user) {
+	const db_user = await Users.findOne({
+		where: { user_id: user.id },
 		include: UserXp,
 	});
 
-	if (user) {
-		return user;
+	if (db_user) {
+		return db_user;
 	} 
-	const username = await client.users.fetch(target_id);
-	console.log('New user w/ id: ' + target_id);
-	const cleanName = username.username.replace(/[^0-9A-Z]+/gi,'');
+	// const username = await client.users.fetch(user.id);
+	console.log('New user w/ id: ' + user.id);
+	const cleanName = user.username.replace(/[^0-9A-Z]+/gi,'');
 	const new_user = await Users.create({
-		user_id: `${target_id}`,
+		user_id: `${user.id}`,
 		name: `${cleanName}`,
 	});
 	return new_user;
@@ -39,18 +39,21 @@ Users.findAllUsers = async function() {
 	return users;
 };
 
-Users.addGlizzys = async function(target_id, amt) {
-	const user = await Users.findOne({
-		where: { user_id: target_id },
+Users.addGlizzys = async function(user, amt) {
+	const db_user = await Users.findOne({
+		where: { user_id: user.id },
 	});
 
-	if (user) {
-		user.glizzys += amt;
-		return user.save();
+	if (db_user) {
+		db_user.glizzys += amt;
+		return db_user.save();
 	} 
-	console.log('New user w/ id: ' + target_id);
+	// const username = await client.users.fetch(user.id);
+	console.log('New user w/ id: ' + user.id);
+	const cleanName = user.username.replace(/[^0-9A-Z]+/gi,'');
 	const new_user = await Users.create({
-		user_id: `${target_id}`,
+		user_id: `${user.id}`,
+		name: `${cleanName}`,
 		glizzys: amt,   
 	});
 	return new_user;

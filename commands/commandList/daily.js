@@ -32,7 +32,7 @@ module.exports = {
 			} else {
 				user.streak = 1;
 			}
-			await p.users.addGlizzys(user.user_id, toGive, user.streak);
+			await p.users.addGlizzys(p.author, toGive);
 			await p.users.addXp(user, 10 + bonusXp);
 			// await p.send(`You're on a \`${user.streak}\` day streak! \`${toGive}\` glizzys have been added to your balance!`);
 			if (Math.random() < 0.5) {
@@ -43,7 +43,7 @@ module.exports = {
 			user.daily = dateString;
 			user.dailies += 1;
 			// console.log(user.daily);
-			user.save();
+			await user.save();
 		} else {
 			await p.send('You have already invoked the daily today!');
 			// await createImage(p);
@@ -109,7 +109,7 @@ async function createSyringe(p, toGive, streak) {
 
 	context.fillText(name, 100, 150);
 	context.restore();
-	console.log(context.measureText('Glizzard Wiz').width);
+	// console.log(context.measureText('Glizzard Wiz').width);
 
 	context.fillText(`${toGive} glizzys`, 125, 200);
 	context.fillText('STREAK', 100, canvas.height - 85);

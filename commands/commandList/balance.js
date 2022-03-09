@@ -16,7 +16,7 @@ module.exports = {
 			p.send('No user with that name exists in this server!');
 			return;
 		}
-		const db_user = await p.getUser(user.id);
+		const db_user = await p.getUser(user);
 		p.send(`${user.user.username}'s current balance is \`${db_user.glizzys}\` glizzys!`);
 	},
 };

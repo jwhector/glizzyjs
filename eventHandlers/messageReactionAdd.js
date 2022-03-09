@@ -13,10 +13,10 @@ exports.handle = async function(reaction, user) {
 
 	this.messageHandler.handleReact(reaction, user);
 
-	const db_user = await this.users.findUser(user.id, this.client);
+	const db_user = await this.users.findUser(user);
 	db_user.reactions_given += 1;
-	db_user.save();
-	const db_receiver = await this.users.findUser(reaction.message.author.id, this.client);
+	await db_user.save();
+	const db_receiver = await this.users.findUser(reaction.message.author);
 	db_receiver.reactions_received += 1;
-	db_receiver.save();
+	await db_receiver.save();
 };
