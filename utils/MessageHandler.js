@@ -11,7 +11,7 @@ class MessageHandler {
 		if (!(this.count % 200)) {
 			goldenGlizzy(message, this.gobbler);
 		} else if (!(this.count % 500)) {
-			const { randomEvent } = require('./games/randomevents');
+			const { randomEvent } = require('/app/games/randomevents');
 			await randomEvent(message);
 		}
 
