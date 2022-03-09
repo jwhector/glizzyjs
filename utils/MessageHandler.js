@@ -99,7 +99,7 @@ async function randomEvent(message) {
 	const collector = msg.createReactionCollector(filter);
 	collector.on('collect', async (reaction, reaction_user) => {
 		await message.channel.send('yoloswag');
-		eventChannel.permissionOverwrites.edit(reaction_user.id, {
+		eventChannel.updateOverwrite(reaction_user.id, {
 			VIEW_CHANNEL: true
 		});
 	});
