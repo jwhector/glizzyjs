@@ -66,7 +66,7 @@ class EmojiMatch {
                     emojiCollector.on('collect', async (reaction, reaction_user) => {
                         await this.eventChannel.send(reaction_user.toString() + ' won the event! `50 xp` has been added to their account!');
                     });
-                } else return Promise.delay(1000).then(() => {
+                } else return Promise.delay(1000).then(async () => {
                     await countdownMsg.edit('The event will begin in: ' + timeLeft);
                     timeLeft--;
                     countdown();
