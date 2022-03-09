@@ -57,7 +57,7 @@ class EmojiMatch {
         collector.on('end', async (collected) => {
             const countdownMsg = await this.eventChannel.send('The event will begin in: 10');
             let timeLeft = 9;
-            const countdown = () => {
+            const countdown = async () => {
                 if (!timeLeft) {
                     const randomEmoji = this.emojis[Math.floor(Math.random() * this.emojis.length)];
                     const emojiMsg = await this.eventChannel.send(randomEmoji);
