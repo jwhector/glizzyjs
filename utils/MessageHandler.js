@@ -11,6 +11,7 @@ class MessageHandler {
 		if (!(this.count % 200)) {
 			goldenGlizzy(message, this.gobbler);
 		} else if (!(this.count % 500)) {
+			const { randomEvent } = require('./games/randomevents');
 			await randomEvent(message);
 		}
 
@@ -76,32 +77,6 @@ async function goldenGlizzy(message, gobbler) {
 		await gobbler.users.addGlizzys(reaction_user, 150);
 		await gobbler.users.addXp(user, 25);
 		await msg.delete();
-	});
-}
-
-async function randomEvent(message) {
-	const eventChannel = await message.guild.channels.create('Random event!', {
-		type: 'GUILD_TEXT',
-		permissionOverwrites: [{
-			id: message.guild.roles.everyone,
-			deny: ['VIEW_CHANNEL'],
-		}]
-	});
-	const msg = await message.channel.send('A random event has started! Enter the portal to join in and earn XP!', {
-		files: [{ attachment: './pics/blackhole.png', name: 'portal.png'}]
-	});
-	try {
-		await msg.react('☄️');
-	} catch (err) {
-		console.error(err);
-	}
-	const filter = (reaction) => reaction.emoji.name === '☄️';
-	const collector = msg.createReactionCollector(filter);
-	collector.on('collect', async (reaction, reaction_user) => {
-		await message.channel.send('yoloswag');
-		eventChannel.updateOverwrite(reaction_user.id, {
-			VIEW_CHANNEL: true
-		});
 	});
 }
 
