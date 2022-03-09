@@ -13,6 +13,7 @@
     "@octokit/core": "^3.5.1",
     "@stdlib/stdlib": "^0.0.96",
     "axios": "^0.21.1",
+    "bluebird": "^3.7.2",
     "canvas": "^2.8.0",
     "cron": "^1.8.2",
     "discord-reply": "^0.1.2",
