@@ -81,8 +81,8 @@ class EmojiMatch {
 						emojiCollector.on('collect', async (reaction, reaction_user) => {
 							const xpToGive = readiedUsers.includes(reaction_user.id) ? 75 : 50;
 							await this.eventChannel.send(reaction_user.toString() + ` won the event! Added \`${xpToGive} xp\`!`);
-							const db_user = await this.gobbler.findUser(reaction_user);
-							await this.gobbler.addXp(db_user, xpToGive);
+							const db_user = await this.gobbler.users.findUser(reaction_user);
+							await this.gobbler.users.addXp(db_user, xpToGive);
 						});
 						emojiCollector.on('end', async (collected, reason) => {
 							await this.eventChannel.send('DEBUG: ' + reason);
