@@ -49,7 +49,7 @@ class EmojiMatch {
 	}
 
 	async play() {
-		const readyMsg = await this.eventChannel.send(this.eventChannel.guild.defaultRole.toString() + ', welcome to Emoji Match! The first to react with the matching emoji on the next message wins the event! React with a ✅ when you\'re ready to go!');
+		const readyMsg = await this.eventChannel.send(this.eventChannel.guild.roles.everyone + ', welcome to Emoji Match! The first to react with the matching emoji on the next message wins the event! React with a ✅ when you\'re ready to go!');
 		await readyMsg.react('✅');
 
 		const filter = (reaction) => reaction.emoji.name === '✅';
