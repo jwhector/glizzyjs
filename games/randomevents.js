@@ -1,8 +1,9 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-unused-vars */
 const Promise = require('bluebird');
+const { ReactionUserManager } = require('discord.js');
 
-async function randomEvent(message) {
+async function randomEvent(message, gobbler) {
 	const eventChannel = await message.guild.channels.create('Random event!', {
 		type: 'GUILD_TEXT',
 		permissionOverwrites: [{
@@ -33,7 +34,7 @@ async function randomEvent(message) {
 
 	collector.on('end', async () => {
 		await msg.edit('This random event closed!');
-		const event = new EmojiMatch(eventChannel,  players);
+		const event = new EmojiMatch(eventChannel,  players, gobbler);
 		await event.play();
 	});
 
@@ -44,7 +45,8 @@ async function randomEvent(message) {
 }
 
 class EmojiMatch {
-	constructor(eventChannel, players) {
+	constructor(eventChannel, players, gobbler) {
+		this.gobbler = gobbler;
 		this.eventChannel = eventChannel;
 		this.players = players;
 		this.emojis = ['✌','😂','😝','😁','😱','👉','🙌','🍻','🔥','🌈','☀','🎈','🌹','💄','🎀','⚽','🎾','🏁','😡','👿','🐻','🐶','🐬','🐟','🍀','👀','🚗','🍎','💝','💙','👌','❤','😍','😉','😓','😳','💪','💩','🍸','🔑','💖','🌟','🎉','🌺','🎶','👠','🏈','⚾','🏆','👽','💀','🐵','🐮','🐩','🐎','💣','👃','👂','🍓','💘','💜','👊','💋','😘','😜','😵','🙏','👋','🚽','💃','💎','🚀','🌙','🎁','⛄','🌊','⛵','🏀','🎱','💰','👶','👸','🐰','🐷','🐍','🐫','🔫','👄','🚲','🍉','💛','💚'];
@@ -56,33 +58,41 @@ class EmojiMatch {
 			// eslint-disable-next-line operator-assignment
 			pingMsg = pingMsg + `${player.toString()}, `;
 		});
-		const readyMsg = await this.eventChannel.send(pingMsg + 'welcome to Emoji Match! The first to react with the matching emoji on the next message wins the event! React with a ✅ when you\'re ready to go!');
+		const readyMsg = await this.eventChannel.send(pingMsg + 'welcome to Emoji Match! The first to react with the matching emoji on the next message wins the event! React with a ✅ when you\'re ready to go, anyone who readies up will receive bonus XP!');
 		await readyMsg.react('✅');
 
 		const filter = (reaction, user) => reaction.emoji.name === '✅' && this.players.map(player => player.id).includes(user.id);
-		const collector = readyMsg.createReactionCollector(filter, { time: 120000, max: this.players.length });
-		// collector.on('collect', async (reaction, reaction_user) => {
-		//     await this.eventChannel.send('yoloswag');
-		// });
+		const collector = readyMsg.createReactionCollector(filter, { time: 60000, max: this.players.length });
+		const readiedUsers = [];
+		collector.on('collect', async (reaction, reaction_user) => {
+			readiedUsers.push(reaction_user.id);
+		});
 		collector.on('end', async (collected) => {
 			const countdownMsg = await this.eventChannel.send('The event will begin in: 10');
 			let timeLeft = 9;
 			const countdown = async () => {
 				if (!timeLeft) {
-					await countdownMsg.delete();
-					const randomEmoji = this.emojis[Math.floor(Math.random() * this.emojis.length)];
-					const emojiMsg = await this.eventChannel.send(randomEmoji);
-					const filter = (reaction, user) => reaction.emoji.name === randomEmoji && this.players.map(player => player.id).includes(user.id);
-					const emojiCollector = emojiMsg.createReactionCollector(filter, { time: 120000, max: 1 });
-					emojiCollector.on('collect', async (reaction, reaction_user) => {
-						await this.eventChannel.send(reaction_user.toString() + ' won the event! Added `50 xp`!');
-					});
-					emojiCollector.on('end', async (collected, reason) => {
-						await this.eventChannel.send('DEBUG: ' + reason);
-						setTimeout(async () => {
-							await this.eventChannel.delete();
-						}, 120000);
-					});
+					try {
+						await countdownMsg.delete();
+						const randomEmoji = this.emojis[Math.floor(Math.random() * this.emojis.length)];
+						const emojiMsg = await this.eventChannel.send(randomEmoji);
+						const filter = (reaction, user) => reaction.emoji.name === randomEmoji && this.players.map(player => player.id).includes(user.id);
+						const emojiCollector = emojiMsg.createReactionCollector(filter, { time: 120000, max: 1 });
+						emojiCollector.on('collect', async (reaction, reaction_user) => {
+							const xpToGive = readiedUsers.includes(reaction_user.id) ? 75 : 50;
+							await this.eventChannel.send(reaction_user.toString() + ` won the event! Added \`${xpToGive} xp\`!`);
+							const db_user = await this.gobbler.findUser(reaction_user);
+							await this.gobbler.addXp(db_user, xpToGive);
+						});
+						emojiCollector.on('end', async (collected, reason) => {
+							await this.eventChannel.send('DEBUG: ' + reason);
+							setTimeout(async () => {
+								await this.eventChannel.delete();
+							}, 120000);
+						});
+					} catch (err) {
+						console.error(err);
+					}
 				} else return Promise.delay(1000).then(async () => {
 					await countdownMsg.edit('The event will begin in: ' + timeLeft);
 					timeLeft--;

@@ -15,7 +15,7 @@ class MessageHandler {
 			goldenGlizzy(message, this.gobbler);
 		} else if (!(this.count % 500)) {
 			const { randomEvent } = require(path.join(__dirname, '../games/randomevents.js'));
-			await randomEvent(message);
+			await randomEvent(message, this.gobbler);
 		}
 
 		await ggEz(message);
