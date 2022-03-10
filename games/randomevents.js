@@ -1,8 +1,7 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-unused-vars */
 const Promise = require('bluebird');
-const { ReactionUserManager } = require('discord.js');
-
+ 
 async function randomEvent(message, gobbler) {
 	const eventChannel = await message.guild.channels.create('Random event!', {
 		type: 'GUILD_TEXT',
@@ -46,6 +45,7 @@ async function randomEvent(message, gobbler) {
 
 class EmojiMatch {
 	constructor(eventChannel, players, gobbler) {
+		console.log(gobbler);
 		this.gobbler = gobbler;
 		this.eventChannel = eventChannel;
 		this.players = players;

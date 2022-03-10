@@ -7,6 +7,6 @@ module.exports = {
 	description: 'Trigger a random event.',
 	async execute(p) {
 		const { randomEvent } = require(path.join(__dirname, '../../games/randomevents.js'));
-		await randomEvent(p.msg);
+		await randomEvent(p.msg, p.gobbler);
 	},
 };
