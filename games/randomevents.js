@@ -31,7 +31,7 @@ async function randomEvent(message) {
 
 	collector.on('end', async () => {
 		await msg.edit('This random event closed!');
-		const event = new EmojiMatch(eventChannel);
+		const event = new EmojiMatch(eventChannel,  numPlayers);
 		await event.play();
 	});
 
