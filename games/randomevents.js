@@ -10,7 +10,7 @@ async function randomEvent(message) {
 			deny: ['VIEW_CHANNEL'],
 		}]
 	});
-	const msg = await message.channel.send('A random event has started! Enter the portal to join in and earn XP! Entry will expire in 60 seconds.', {
+	const msg = await message.channel.send('A random event has started! Enter the portal to join in and earn XP! Entry will expire 60 seconds after the portal opens.', {
 		files: [{ attachment: './pics/blackhole.png', name: 'portal.png'}]
 	});
 	try {
@@ -19,6 +19,7 @@ async function randomEvent(message) {
 		console.error(err);
 	}
 	let numPlayers = 0;
+	const players = [];
 	const filter = (reaction) => reaction.emoji.name === '☄️';
 	const collector = msg.createReactionCollector(filter, { time: 60000 });
 	collector.on('collect', async (reaction, reaction_user) => {
@@ -27,11 +28,12 @@ async function randomEvent(message) {
 		});
 		await eventChannel.send('Welcome ' + reaction_user.toString() + '!');
 		numPlayers++;
+		players.push(reaction_user);
 	});
 
 	collector.on('end', async () => {
 		await msg.edit('This random event closed!');
-		const event = new EmojiMatch(eventChannel,  numPlayers);
+		const event = new EmojiMatch(eventChannel,  players);
 		await event.play();
 	});
 
@@ -42,18 +44,23 @@ async function randomEvent(message) {
 }
 
 class EmojiMatch {
-	constructor(eventChannel, numPlayers) {
+	constructor(eventChannel, players) {
 		this.eventChannel = eventChannel;
-		this.numPlayers = numPlayers;
+		this.players = players;
 		this.emojis = ['✌','😂','😝','😁','😱','👉','🙌','🍻','🔥','🌈','☀','🎈','🌹','💄','🎀','⚽','🎾','🏁','😡','👿','🐻','🐶','🐬','🐟','🍀','👀','🚗','🍎','💝','💙','👌','❤','😍','😉','😓','😳','💪','💩','🍸','🔑','💖','🌟','🎉','🌺','🎶','👠','🏈','⚾','🏆','👽','💀','🐵','🐮','🐩','🐎','💣','👃','👂','🍓','💘','💜','👊','💋','😘','😜','😵','🙏','👋','🚽','💃','💎','🚀','🌙','🎁','⛄','🌊','⛵','🏀','🎱','💰','👶','👸','🐰','🐷','🐍','🐫','🔫','👄','🚲','🍉','💛','💚'];
 	}
 
 	async play() {
-		const readyMsg = await this.eventChannel.send(this.eventChannel.guild.roles.everyone + ', welcome to Emoji Match! The first to react with the matching emoji on the next message wins the event! React with a ✅ when you\'re ready to go!');
+		let pingMsg = '';
+		this.players.forEach(player => {
+			// eslint-disable-next-line operator-assignment
+			pingMsg = pingMsg + `${player.toString()}, `;
+		});
+		const readyMsg = await this.eventChannel.send(pingMsg + 'welcome to Emoji Match! The first to react with the matching emoji on the next message wins the event! React with a ✅ when you\'re ready to go!');
 		await readyMsg.react('✅');
 
-		const filter = (reaction) => reaction.emoji.name === '✅';
-		const collector = readyMsg.createReactionCollector(filter, { time: 120000, max: this.numPlayers });
+		const filter = (reaction, user) => reaction.emoji.name === '✅' && this.players.map(player => player.id).includes(user.id);
+		const collector = readyMsg.createReactionCollector(filter, { time: 120000, max: this.players.length });
 		// collector.on('collect', async (reaction, reaction_user) => {
 		//     await this.eventChannel.send('yoloswag');
 		// });
@@ -65,7 +72,7 @@ class EmojiMatch {
 					await countdownMsg.delete();
 					const randomEmoji = this.emojis[Math.floor(Math.random() * this.emojis.length)];
 					const emojiMsg = await this.eventChannel.send(randomEmoji);
-					const filter = (reaction) => reaction.emoji.name === randomEmoji;
+					const filter = (reaction, user) => reaction.emoji.name === randomEmoji && this.players.map(player => player.id).includes(user.id);
 					const emojiCollector = emojiMsg.createReactionCollector(filter, { time: 120000, max: 1 });
 					emojiCollector.on('collect', async (reaction, reaction_user) => {
 						await this.eventChannel.send(reaction_user.toString() + ' won the event! Added `50 xp`!');
