@@ -26,10 +26,14 @@ class Levels {
 					}
 					return false;
 				});
-				roleCache.forEach(async (value, key) => {
-					await member.roles.remove(key);
-				});
-				await member.roles.add(guildRole);
+				try {
+					roleCache.forEach(async (value, key) => {
+						await member.roles.remove(key);
+					});
+					await member.roles.add(guildRole);
+				} catch (err) {
+					console.error(err);
+				}
 			}
 		}
 
