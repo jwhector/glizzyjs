@@ -69,6 +69,7 @@ class Game {
 	}
 
 	async play(welcomeMsg, play_callback) {
+		// console.log(this);
 		try {
 			const collector = await this.welcome(welcomeMsg);
 			collector.on('collect', async (reaction, reaction_user) => {
@@ -126,6 +127,7 @@ class EmojiMatch extends Game {
 	}
 
 	async play() {
+		console.log(this);
 		try {
 			await super.play(this.welcomeMsg, this.play_callback);
 		} catch (err) {
