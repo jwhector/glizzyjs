@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 // const Discord = require('discord.js');
 
-const sequelize = new Sequelize(process.env.JAWSDB_URL);
+const sequelize = new Sequelize('mysql://customer_269565_glizzy:42rqJA~jddf5@dFrFtp0@na03-sql.pebblehost.com/customer_269565_glizzy');
 
 const Users = require('./Users')(sequelize, Sequelize.DataTypes);
 const Messages = require('./Messages')(sequelize, Sequelize.DataTypes);
