@@ -34,7 +34,6 @@ module.exports = {
 			}
 			await p.users.addGlizzys(p.author, toGive);
 			await p.users.addXp(user, 10 + bonusXp);
-			// await p.send(`You're on a \`${user.streak}\` day streak! \`${toGive}\` glizzys have been added to your balance!`);
 			if (Math.random() < 0.5) {
 				await createImage(p, toGive, user.streak);
 			} else {
@@ -47,6 +46,25 @@ module.exports = {
 		} else {
 			await p.send('You have already invoked the daily today!');
 			// await createImage(p);
+			// if (user.fake_streak <= user.streak) user.fake_streak = user.streak + 1;
+			// else user.fake_streak += 1;
+
+			// // April Fools
+			// let toGive = 150;
+			// if (user.fake_streak >= 15) {
+			// 	toGive = 300;
+			// } else if (user.fake_streak >= 5) {
+			// 	toGive = 150 + 50 * Math.trunc(user.fake_streak / 5);
+			// }
+
+			// if (Math.random() < 0.5) {
+			// 	await createImage(p, toGive, user.fake_streak);
+			// } else {
+			// 	await createSyringe(p, toGive, user.fake_streak);
+			// }
+
+			// user.fake_glizzys += toGive;
+			// await user.save();
 		}
 	},
 };

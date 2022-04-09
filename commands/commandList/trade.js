@@ -1,8 +1,10 @@
+/* eslint-disable no-unreachable */
 module.exports = {
 	name: 'trade',
 	description: 'Transfer one user\'s glizzys to another\'s.',
 	example: '$trade @Penicillen 69',
 	async execute(p) {
+
 		const target = p.msg.mentions.users.first();
 		const author = await p.getAuthor();
 		const amt = Number(p.args[1]);

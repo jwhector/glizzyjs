@@ -196,19 +196,45 @@ function voiceIntervalTimeHelper(value, key) {
 
 async function decayXp() {
 	const users = await this.gobbler.users.findAllUsers();
+	const usersToUpdate = [];
+	const userXPsToUpdate = [];
 	for (const user of users) {
 		const multiplier = 0.0186 * (1.4 ** (user.rep_level - 1));
 		const newXp = user.xp - multiplier;
 		if (newXp > 0) {
 			const newLvl = Math.ceil(newXp / 150);
-			await user.decrement('xp', { by: multiplier });
-			await user.user_xp.addXp(user, 'decay_daily', multiplier);
-			await user.user_xp.addXp(user, 'decay_weekly', multiplier); 
-			if (newLvl < user.rep_level) {
-				await user.decrement('rep_level', { by: 1 });
-			}
+			const userToUpdate = {
+				user_id: user.user_id,
+				xp: newXp,
+				rep_level: newLvl < user.rep_level ? user.rep_level - 1 : user.rep_level
+			};
+			const userXPToUpdate = {
+				user_id: user.user_id,
+				decay_daily: user.user_xp.decay_daily + multiplier,
+				decay_weekly: user.user_xp.decay_weekly + multiplier
+			};
+			usersToUpdate.push(userToUpdate);
+			userXPsToUpdate.push(userXPToUpdate);
+			// await user.decrement('xp', { by: multiplier });
+			// await user.user_xp.addXp(user, 'decay_daily', multiplier);
+			// await user.user_xp.addXp(user, 'decay_weekly', multiplier); 
+			// if (newLvl < user.rep_level) {
+			// 	await user.decrement('rep_level', { by: 1 });
+			// }
 		} 
 	}
+	await this.gobbler.users.bulkCreate(
+		usersToUpdate,
+		{
+			updateOnDuplicate: ['xp', 'rep_level']
+		}
+	);
+	await this.gobbler.userXp.bulkCreate(
+		userXPsToUpdate,
+		{
+			updateOnDuplicate: ['decay_daily', 'decay_weekly']
+		}
+	);
 }
 
 module.exports = Timer;

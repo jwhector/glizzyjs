@@ -1,3 +1,4 @@
+/* eslint-disable no-unreachable */
 /* eslint-disable no-unused-vars */
 const Levels = require('../../utils/Levels');
 
@@ -11,7 +12,7 @@ module.exports = {
 		const curRepLvl = db_user.rep_level;
 
 		if (curLvl + 1 > curRepLvl * 10) {
-			await p.send(`You need a reputation level of \`${Math.ceil((curLvl + 1) / 10)}\` to level up!`);
+			// await p.send(`You need a reputation level of \`${Math.ceil((curLvl + 1) / 10)}\` to level up!`);
 			return;
 		}
 

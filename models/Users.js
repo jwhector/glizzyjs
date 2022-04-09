@@ -184,6 +184,16 @@ module.exports = (sequelize, DataTypes) => sequelize.define('users', {
 		type: DataTypes.BOOLEAN,
 		defaultValue: false,
 		allowNull: false,
+	},
+	fake_glizzys: {
+		type: DataTypes.INTEGER,
+		defaultValue: 0,
+		allowNull: false,
+	},
+	fake_streak: {
+		type: DataTypes.INTEGER,
+		defaultValue: 0,
+		allowNull: false,
 	}
 }, {
 	timestamps: false,

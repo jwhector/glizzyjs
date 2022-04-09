@@ -14,7 +14,6 @@ module.exports = {
 			const bags = new (require('../../utils/Squeezebags'))(p.gobbler);
 			await bags.squeeze(p.msg, p.args);
 		} else {
-			const author = await p.users.findUser(p.author);
 			const bag = await p.msg.channel.send('💰');
 			await p.msg.channel.send('A bag has been summoned for squeezing!');
     
@@ -44,7 +43,7 @@ module.exports = {
 					collector.stop();
 				}
 			});
-			collector.on('end', collected => console.log(`Collected ${collected.size} items`));
+			collector.on('end', collected => console.log(`Collected ${collected.size} items.`));
 		}
 	},
 };
