@@ -223,18 +223,22 @@ async function decayXp() {
 			// }
 		} 
 	}
-	await this.gobbler.users.bulkCreate(
-		usersToUpdate,
-		{
-			updateOnDuplicate: ['xp', 'rep_level']
-		}
-	);
-	await this.gobbler.userXp.bulkCreate(
-		userXPsToUpdate,
-		{
-			updateOnDuplicate: ['decay_daily', 'decay_weekly']
-		}
-	);
+	try {
+		await this.gobbler.users.bulkCreate(
+			usersToUpdate,
+			{
+				updateOnDuplicate: ['xp', 'rep_level']
+			}
+		);
+		await this.gobbler.userXp.bulkCreate(
+			userXPsToUpdate,
+			{
+				updateOnDuplicate: ['decay_daily', 'decay_weekly']
+			}
+		);
+	} catch (err) {
+		console.error(err);
+	}
 }
 
 module.exports = Timer;
