@@ -6,7 +6,6 @@ module.exports = (sequelize, DataTypes) => {
 		},
 		user_name: {
 			type: DataTypes.STRING,
-			allowNull: false,
 		},
 		textXp_daily: {
 			type: DataTypes.DOUBLE,

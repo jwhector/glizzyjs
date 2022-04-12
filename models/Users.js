@@ -5,7 +5,6 @@ module.exports = (sequelize, DataTypes) => sequelize.define('users', {
 	},
 	name: {
 		type: DataTypes.STRING,
-		allowNull: false,
 	},
 	glizzys: {
 		type: DataTypes.INTEGER,
