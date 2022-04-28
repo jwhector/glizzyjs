@@ -198,23 +198,31 @@ async function decayXp() {
 	const users = await this.gobbler.users.findAllUsers();
 	const usersToUpdate = [];
 	const userXPsToUpdate = [];
-	for (const user of users) {
-		const multiplier = 0.0186 * (1.4 ** (user.rep_level - 1));
-		const newXp = user.xp - multiplier;
+	for (let i = 0; i < users.length; i++) {
+		const multiplier = 0.0186 * (1.4 ** (users[i].rep_level - 1));
+		const newXp = users[i].xp - multiplier;
 		if (newXp > 0) {
 			const newLvl = Math.ceil(newXp / 150);
-			const userToUpdate = {
-				user_id: user.user_id,
+			// const userToUpdate = {
+			// 	user_id: users[i].user_id,
+			// 	xp: newXp,
+			// 	rep_level: newLvl < users[i].rep_level ? users[i].rep_level - 1 : users[i].rep_level
+			// };
+			// const userXPToUpdate = {
+			// 	user_id: users[i].user_id,
+			// 	decay_daily: users[i].user_xp.decay_daily + multiplier,
+			// 	decay_weekly: users[i].user_xp.decay_weekly + multiplier
+			// };
+			usersToUpdate.push({
+				user_id: users[i].user_id,
 				xp: newXp,
-				rep_level: newLvl < user.rep_level ? user.rep_level - 1 : user.rep_level
-			};
-			const userXPToUpdate = {
-				user_id: user.user_id,
-				decay_daily: user.user_xp.decay_daily + multiplier,
-				decay_weekly: user.user_xp.decay_weekly + multiplier
-			};
-			usersToUpdate.push(userToUpdate);
-			userXPsToUpdate.push(userXPToUpdate);
+				rep_level: newLvl < users[i].rep_level ? users[i].rep_level - 1 : users[i].rep_level
+			});
+			userXPsToUpdate.push({
+				user_id: users[i].user_id,
+				decay_daily: users[i].user_xp.decay_daily + multiplier,
+				decay_weekly: users[i].user_xp.decay_weekly + multiplier
+			});
 			// await user.decrement('xp', { by: multiplier });
 			// await user.user_xp.addXp(user, 'decay_daily', multiplier);
 			// await user.user_xp.addXp(user, 'decay_weekly', multiplier); 

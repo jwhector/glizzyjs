@@ -1,0 +1,589 @@
+
+{
+  "header": {
+    "reportVersion": 2,
+    "event": "Allocation failed - JavaScript heap out of memory",
+    "trigger": "FatalError",
+    "filename": "report.20220422.034611.42.0.001.json",
+    "dumpEventTime": "2022-04-22T03:46:11Z",
+    "dumpEventTimeStamp": "1650599171797",
+    "processId": 42,
+    "threadId": null,
+    "cwd": "/home/minecraft/multicraft/servers/server269565",
+    "commandLine": [
+      "node",
+      "index.js"
+    ],
+    "nodejsVersion": "v12.16.3",
+    "glibcVersionRuntime": "2.27",
+    "glibcVersionCompiler": "2.17",
+    "wordSize": 64,
+    "arch": "x64",
+    "platform": "linux",
+    "componentVersions": {
+      "node": "12.16.3",
+      "v8": "7.8.279.23-node.35",
+      "uv": "1.34.2",
+      "zlib": "1.2.11",
+      "brotli": "1.0.7",
+      "ares": "1.16.0",
+      "modules": "72",
+      "nghttp2": "1.40.0",
+      "napi": "5",
+      "llhttp": "2.0.4",
+      "http_parser": "2.9.3",
+      "openssl": "1.1.1g",
+      "cldr": "36.0",
+      "icu": "65.1",
+      "tz": "2019c",
+      "unicode": "12.1"
+    },
+    "release": {
+      "name": "node",
+      "lts": "Erbium",
+      "headersUrl": "https://nodejs.org/download/release/v12.16.3/node-v12.16.3-headers.tar.gz",
+      "sourceUrl": "https://nodejs.org/download/release/v12.16.3/node-v12.16.3.tar.gz"
+    },
+    "osName": "Linux",
+    "osRelease": "4.4.232-1.el7.elrepo.x86_64",
+    "osVersion": "#1 SMP Fri Jul 31 11:49:26 EDT 2020",
+    "osMachine": "x86_64",
+    "cpus": [
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-1650 v3 @ 3.50GHz",
+        "speed": 3599,
+        "user": 10595986100,
+        "nice": 75600,
+        "sys": 4088568400,
+        "idle": 10807678700,
+        "irq": 0
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-1650 v3 @ 3.50GHz",
+        "speed": 3599,
+        "user": 10890489700,
+        "nice": 63600,
+        "sys": 4404782500,
+        "idle": 11097282800,
+        "irq": 0
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-1650 v3 @ 3.50GHz",
+        "speed": 3599,
+        "user": 10896814300,
+        "nice": 56100,
+        "sys": 4410768000,
+        "idle": 11103026600,
+        "irq": 0
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-1650 v3 @ 3.50GHz",
+        "speed": 3599,
+        "user": 10899461200,
+        "nice": 81000,
+        "sys": 4412332000,
+        "idle": 11108691000,
+        "irq": 0
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-1650 v3 @ 3.50GHz",
+        "speed": 3590,
+        "user": 10905930800,
+        "nice": 47600,
+        "sys": 4393915000,
+        "idle": 11122883100,
+        "irq": 0
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-1650 v3 @ 3.50GHz",
+        "speed": 3599,
+        "user": 10879582000,
+        "nice": 48200,
+        "sys": 4416955000,
+        "idle": 11132874400,
+        "irq": 0
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-1650 v3 @ 3.50GHz",
+        "speed": 3599,
+        "user": 9316337800,
+        "nice": 95200,
+        "sys": 4197097000,
+        "idle": 13031628300,
+        "irq": 0
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-1650 v3 @ 3.50GHz",
+        "speed": 3585,
+        "user": 9102416300,
+        "nice": 41800,
+        "sys": 4233976800,
+        "idle": 13295438700,
+        "irq": 0
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-1650 v3 @ 3.50GHz",
+        "speed": 3599,
+        "user": 9118395300,
+        "nice": 39500,
+        "sys": 4228181300,
+        "idle": 13286277700,
+        "irq": 0
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-1650 v3 @ 3.50GHz",
+        "speed": 3599,
+        "user": 9116356300,
+        "nice": 85000,
+        "sys": 4225164100,
+        "idle": 13294032600,
+        "irq": 0
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-1650 v3 @ 3.50GHz",
+        "speed": 3590,
+        "user": 9111770600,
+        "nice": 35600,
+        "sys": 4228341800,
+        "idle": 13293835600,
+        "irq": 0
+      },
+      {
+        "model": "Intel(R) Xeon(R) CPU E5-1650 v3 @ 3.50GHz",
+        "speed": 3589,
+        "user": 9089849700,
+        "nice": 39700,
+        "sys": 4228181600,
+        "idle": 13318002600,
+        "irq": 0
+      }
+    ],
+    "networkInterfaces": [
+      {
+        "name": "lo",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "127.0.0.1",
+        "netmask": "255.0.0.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "eth0",
+        "internal": false,
+        "mac": "02:42:ac:11:00:1a",
+        "address": "172.17.0.26",
+        "netmask": "255.255.0.0",
+        "family": "IPv4"
+      }
+    ],
+    "host": "11acb9edee81"
+  },
+  "javascriptStack": {
+    "message": "No stack.",
+    "stack": [
+      "Unavailable."
+    ]
+  },
+  "nativeStack": [
+    {
+      "pc": "0x0000000000b46955",
+      "symbol": "report::TriggerNodeReport(v8::Isolate*, node::Environment*, char const*, char const*, std::string const&, v8::Local<v8::String>) [node]"
+    },
+    {
+      "pc": "0x0000000000a09c8f",
+      "symbol": "node::OnFatalError(char const*, char const*) [node]"
+    },
+    {
+      "pc": "0x0000000000b7d71e",
+      "symbol": "v8::Utils::ReportOOMFailure(v8::internal::Isolate*, char const*, bool) [node]"
+    },
+    {
+      "pc": "0x0000000000b7da99",
+      "symbol": "v8::internal::V8::FatalProcessOutOfMemory(v8::internal::Isolate*, char const*, bool) [node]"
+    },
+    {
+      "pc": "0x0000000000d2a1f5",
+      "symbol": " [node]"
+    },
+    {
+      "pc": "0x0000000000d2a886",
+      "symbol": "v8::internal::Heap::RecomputeLimits(v8::internal::GarbageCollector) [node]"
+    },
+    {
+      "pc": "0x0000000000d37105",
+      "symbol": "v8::internal::Heap::PerformGarbageCollection(v8::internal::GarbageCollector, v8::GCCallbackFlags) [node]"
+    },
+    {
+      "pc": "0x0000000000d37fb5",
+      "symbol": "v8::internal::Heap::CollectGarbage(v8::internal::AllocationSpace, v8::internal::GarbageCollectionReason, v8::GCCallbackFlags) [node]"
+    },
+    {
+      "pc": "0x0000000000d3aa6c",
+      "symbol": "v8::internal::Heap::AllocateRawWithRetryOrFail(int, v8::internal::AllocationType, v8::internal::AllocationOrigin, v8::internal::AllocationAlignment) [node]"
+    },
+    {
+      "pc": "0x0000000000d0163b",
+      "symbol": "v8::internal::Factory::NewFillerObject(int, bool, v8::internal::AllocationType, v8::internal::AllocationOrigin) [node]"
+    },
+    {
+      "pc": "0x000000000104300e",
+      "symbol": "v8::internal::Runtime_AllocateInYoungGeneration(int, unsigned long*, v8::internal::Isolate*) [node]"
+    },
+    {
+      "pc": "0x00000000013c5b79",
+      "symbol": " [node]"
+    }
+  ],
+  "javascriptHeap": {
+    "totalMemory": 1080311808,
+    "totalCommittedMemory": 1076025264,
+    "usedMemory": 1072894536,
+    "availableMemory": 23505672,
+    "memoryLimit": 1098907648,
+    "heapSpaces": {
+      "read_only_space": {
+        "memorySize": 262144,
+        "committedMemory": 33088,
+        "capacity": 32808,
+        "used": 32808,
+        "available": 0
+      },
+      "new_space": {
+        "memorySize": 5242880,
+        "committedMemory": 1758792,
+        "capacity": 2618640,
+        "used": 574080,
+        "available": 2044560
+      },
+      "old_space": {
+        "memorySize": 1066016768,
+        "committedMemory": 1065746704,
+        "capacity": 1064776896,
+        "used": 1064530264,
+        "available": 246632
+      },
+      "code_space": {
+        "memorySize": 692224,
+        "committedMemory": 559808,
+        "capacity": 424608,
+        "used": 424608,
+        "available": 0
+      },
+      "map_space": {
+        "memorySize": 1576960,
+        "committedMemory": 1406040,
+        "capacity": 879920,
+        "used": 879920,
+        "available": 0
+      },
+      "large_object_space": {
+        "memorySize": 6471680,
+        "committedMemory": 6471680,
+        "capacity": 6450072,
+        "used": 6450072,
+        "available": 0
+      },
+      "code_large_object_space": {
+        "memorySize": 49152,
+        "committedMemory": 49152,
+        "capacity": 2784,
+        "used": 2784,
+        "available": 0
+      },
+      "new_large_object_space": {
+        "memorySize": 0,
+        "committedMemory": 0,
+        "capacity": 2618640,
+        "used": 0,
+        "available": 2618640
+      }
+    }
+  },
+  "resourceUsage": {
+    "userCpuSeconds": 34.1668,
+    "kernelCpuSeconds": 1.01209,
+    "cpuConsumptionPercent": 42.3842,
+    "maxRss": 1151971328,
+    "pageFaults": {
+      "IORequired": 67,
+      "IONotRequired": 306620
+    },
+    "fsActivity": {
+      "reads": 536,
+      "writes": 16
+    }
+  },
+  "uvthreadResourceUsage": {
+    "userCpuSeconds": 16.4503,
+    "kernelCpuSeconds": 0.400744,
+    "cpuConsumptionPercent": 20.3024,
+    "fsActivity": {
+      "reads": 520,
+      "writes": 16
+    }
+  },
+  "libuv": [
+  ],
+  "workers": [
+  ],
+  "environmentVariables": {
+    "JAVA_URL_VERSION": "8u242b08",
+    "npm_config_cache_lock_stale": "60000",
+    "npm_config_ham_it_up": "",
+    "npm_package_dependencies_bluebird": "^3.7.2",
+    "npm_config_legacy_bundling": "",
+    "npm_config_sign_git_tag": "",
+    "NO_UPDATE_NOTIFIER": "true",
+    "npm_config_user_agent": "npm/6.14.4 node/v12.16.3 linux x64",
+    "npm_config_always_auth": "",
+    "npm_config_bin_links": "true",
+    "npm_config_key": "",
+    "HOSTNAME": "11acb9edee81",
+    "npm_config_allow_same_version": "",
+    "npm_config_description": "true",
+    "npm_config_fetch_retries": "2",
+    "npm_config_heading": "npm",
+    "npm_config_if_present": "",
+    "npm_config_init_version": "1.0.0",
+    "npm_config_user": "1001",
+    "npm_node_execpath": "/opt/node/node-v12.16.3-linux-x64/bin/node",
+    "npm_config_prefer_online": "",
+    "npm_config_noproxy": "",
+    "JAVA_BASE_URL": "https://github.com/AdoptOpenJDK/openjdk8-upstream-binaries/releases/download/jdk8u242-b08/OpenJDK8U-jre_",
+    "HOME": "/home/minecraft/multicraft/servers/server269565",
+    "npm_config_force": "",
+    "SERVER_ID": "269565",
+    "npm_config_only": "",
+    "npm_config_read_only": "",
+    "npm_config_cache_min": "10",
+    "npm_config_init_license": "ISC",
+    "npm_package_dependencies_discord_reply": "^0.1.2",
+    "npm_config_editor": "vi",
+    "npm_config_rollback": "true",
+    "npm_config_tag_version_prefix": "v",
+    "LC_CTYPE": "en_US.UTF-8",
+    "npm_package_dependencies__stdlib_stdlib": "^0.0.96",
+    "npm_package_dependencies_mysql2": "^2.2.5",
+    "npm_config_cache_max": "Infinity",
+    "npm_config_timing": "",
+    "npm_config_userconfig": "/home/minecraft/multicraft/servers/server269565/.npmrc",
+    "npm_package_dependencies_dotenv": "^8.2.0",
+    "npm_config_engine_strict": "",
+    "npm_config_init_author_name": "",
+    "npm_config_init_author_url": "",
+    "npm_config_preid": "",
+    "npm_config_tmp": "/tmp",
+    "npm_package_description": "Glizzys United Discord bot built using Node.js",
+    "npm_config_depth": "Infinity",
+    "npm_config_package_lock_only": "",
+    "npm_config_save_dev": "",
+    "npm_config_usage": "",
+    "JAVA_VERSION": "8u242",
+    "npm_package_readmeFilename": "README.md",
+    "npm_config_metrics_registry": "https://registry.npmjs.org/",
+    "npm_config_cafile": "",
+    "npm_config_otp": "",
+    "npm_config_package_lock": "true",
+    "npm_config_progress": "true",
+    "npm_config_https_proxy": "",
+    "npm_config_save_prod": "",
+    "npm_package_dependencies_pg_hstore": "^2.3.3",
+    "npm_config_audit": "true",
+    "npm_config_cidr": "",
+    "npm_config_onload_script": "",
+    "npm_config_sso_type": "oauth",
+    "npm_package_devDependencies_eslint_plugin_import": "^2.25.4",
+    "npm_config_rebuild_bundle": "true",
+    "npm_config_save_bundle": "",
+    "npm_config_shell": "bash",
+    "npm_package_dependencies_express": "^4.17.2",
+    "npm_config_dry_run": "",
+    "npm_config_format_package_lock": "true",
+    "npm_config_prefix": "/opt/node/node-v12.16.3-linux-x64",
+    "npm_config_scope": "",
+    "npm_config_browser": "",
+    "npm_config_cache_lock_wait": "10000",
+    "npm_config_ignore_prepublish": "",
+    "npm_config_registry": "https://registry.npmjs.org/",
+    "npm_config_save_optional": "",
+    "npm_config_searchopts": "",
+    "npm_config_versions": "",
+    "npm_package_devDependencies_eslint_config_node": "^2.0.0",
+    "npm_config_cache": "/tmp/npm",
+    "npm_config_proxy": "",
+    "npm_config_send_metrics": "",
+    "npm_package_scripts_start": "node index.js",
+    "npm_config_global_style": "",
+    "npm_config_ignore_scripts": "",
+    "npm_config_version": "",
+    "npm_package_dependencies_axios": "^0.21.1",
+    "npm_config_local_address": "",
+    "npm_config_viewer": "man",
+    "npm_config_node_gyp": "/opt/node/node-v12.16.3-linux-x64/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js",
+    "PATH": "/opt/node/node-v12.16.3-linux-x64/lib/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/home/minecraft/multicraft/servers/server269565/node_modules/.bin:/tmp/node_override/bin:/opt/node/node-v12.16.3-linux-x64/bin:/usr/local/openjdk-8/bin:/usr/local/openjdk-11/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+    "npm_package_name": "glizzyjs",
+    "npm_config_audit_level": "low",
+    "npm_config_prefer_offline": "",
+    "NODE": "/opt/node/node-v12.16.3-linux-x64/bin/node",
+    "npm_config_color": "true",
+    "npm_config_sign_git_commit": "",
+    "npm_package_dependencies_cron": "^1.8.2",
+    "npm_config_fetch_retry_mintimeout": "10000",
+    "npm_config_maxsockets": "50",
+    "npm_config_offline": "",
+    "npm_config_sso_poll_frequency": "500",
+    "LANG": "en_US.UTF-8",
+    "npm_package_devDependencies_eslint": "^8.8.0",
+    "npm_config_umask": "0022",
+    "npm_package_main": "index.js",
+    "npm_package_dependencies_discord_js": "^12.5.1",
+    "npm_package_devDependencies_eslint_config_esnext": "^2.0.0",
+    "npm_config_fund": "true",
+    "npm_config_fetch_retry_maxtimeout": "60000",
+    "npm_config_loglevel": "notice",
+    "npm_config_logs_max": "10",
+    "npm_config_message": "%s",
+    "npm_lifecycle_script": "node index.js",
+    "npm_package_scripts_test": "echo \"Error: no test specified\" && exit 1",
+    "npm_package_dependencies_sequelize": "^6.6.2",
+    "npm_config_ca": "",
+    "npm_config_cert": "",
+    "npm_config_global": "",
+    "npm_config_link": "",
+    "npm_package_version": "1.0.0",
+    "npm_package_nodeVersion": "12.16.3",
+    "npm_config_access": "",
+    "npm_config_also": "",
+    "npm_config_save": "true",
+    "npm_config_unicode": "true",
+    "npm_lifecycle_event": "start",
+    "npm_config_argv": "{\"remain\":[],\"cooked\":[\"start\"],\"original\":[\"start\"]}",
+    "npm_config_before": "",
+    "npm_config_long": "",
+    "npm_config_production": "",
+    "npm_config_searchlimit": "20",
+    "npm_config_unsafe_perm": "true",
+    "npm_config_update_notifier": "true",
+    "npm_config_auth_type": "legacy",
+    "npm_config_node_version": "12.16.3",
+    "npm_config_tag": "latest",
+    "npm_package_dependencies_canvas": "^2.8.0",
+    "npm_config_git_tag_version": "true",
+    "npm_config_commit_hooks": "true",
+    "npm_config_script_shell": "",
+    "npm_config_shrinkwrap": "true",
+    "npm_package_license": "ISC",
+    "npm_package_devDependencies_eslint_plugin_react": "^7.28.0",
+    "npm_config_fetch_retry_factor": "10",
+    "npm_config_save_exact": "",
+    "npm_config_strict_ssl": "true",
+    "npm_config_dev": "",
+    "npm_config_globalconfig": "/opt/node/node-v12.16.3-linux-x64/etc/npmrc",
+    "npm_config_init_module": "/home/minecraft/multicraft/servers/server269565/.npm-init.js",
+    "npm_config_parseable": "",
+    "JAVA_HOME": "/usr/local/openjdk-8",
+    "npm_package_dependencies__octokit_core": "^3.5.1",
+    "npm_config_globalignorefile": "/opt/node/node-v12.16.3-linux-x64/etc/npmignore",
+    "npm_execpath": "/opt/node/node-v12.16.3-linux-x64/lib/node_modules/npm/bin/npm-cli.js",
+    "PWD": "/home/minecraft/multicraft/servers/server269565",
+    "npm_package_author_name": "Jared Hector",
+    "npm_config_cache_lock_retries": "10",
+    "npm_config_searchstaleness": "900",
+    "npm_config_node_options": "",
+    "npm_config_save_prefix": "^",
+    "npm_config_scripts_prepend_node_path": "warn-only",
+    "ENDPOINT": "https://panel.pebblehost.com/api.php",
+    "npm_config_group": "1099",
+    "npm_config_init_author_email": "",
+    "npm_config_searchexclude": "",
+    "npm_config_git": "git",
+    "npm_config_optional": "true",
+    "npm_package_dependencies_pg": "^8.5.1",
+    "npm_config_json": "",
+    "INIT_CWD": "/home/minecraft/multicraft/servers/server269565",
+    "JAWSDB_URL": "mysql://wnvf8rexbiqlz5r7:xx85dmda5yidd5j7@i0rgccmrx3at3wv3.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/qmo5a3q1vbqc5ap5",
+    "TOKEN": "ODE5OTY0OTM3ODY1NTI3MzY2.YEuR2w.bhQOHW53SGzYRei8yMR54ylu3JA"
+  },
+  "userLimits": {
+    "core_file_size_blocks": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "data_seg_size_kbytes": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "file_size_blocks": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "max_locked_memory_bytes": {
+      "soft": 65536,
+      "hard": 65536
+    },
+    "max_memory_size_kbytes": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "open_files": {
+      "soft": 1048576,
+      "hard": 1048576
+    },
+    "stack_size_bytes": {
+      "soft": 8388608,
+      "hard": "unlimited"
+    },
+    "cpu_time_seconds": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "max_user_processes": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "virtual_memory_kbytes": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    }
+  },
+  "sharedObjects": [
+    "linux-vdso.so.1",
+    "/lib/x86_64-linux-gnu/libdl.so.2",
+    "/usr/lib/x86_64-linux-gnu/libstdc++.so.6",
+    "/lib/x86_64-linux-gnu/libm.so.6",
+    "/lib/x86_64-linux-gnu/libgcc_s.so.1",
+    "/lib/x86_64-linux-gnu/libpthread.so.0",
+    "/lib/x86_64-linux-gnu/libc.so.6",
+    "/lib64/ld-linux-x86-64.so.2",
+    "/lib/x86_64-linux-gnu/libnss_files.so.2",
+    "/lib/x86_64-linux-gnu/libnss_dns.so.2",
+    "/lib/x86_64-linux-gnu/libresolv.so.2",
+    "/home/minecraft/multicraft/servers/server269565/node_modules/canvas/build/Release/canvas.node",
+    "/home/minecraft/multicraft/servers/server269565/node_modules/canvas/build/Release/libpixman-1.so.0",
+    "/home/minecraft/multicraft/servers/server269565/node_modules/canvas/build/Release/libcairo.so.2",
+    "/home/minecraft/multicraft/servers/server269565/node_modules/canvas/build/Release/libpng16.so.16",
+    "/home/minecraft/multicraft/servers/server269565/node_modules/canvas/build/Release/libz.so.1",
+    "/home/minecraft/multicraft/servers/server269565/node_modules/canvas/build/Release/libpangocairo-1.0.so.0",
+    "/home/minecraft/multicraft/servers/server269565/node_modules/canvas/build/Release/libpango-1.0.so.0",
+    "/home/minecraft/multicraft/servers/server269565/node_modules/canvas/build/Release/libgobject-2.0.so.0",
+    "/home/minecraft/multicraft/servers/server269565/node_modules/canvas/build/Release/libglib-2.0.so.0",
+    "/home/minecraft/multicraft/servers/server269565/node_modules/canvas/build/Release/libharfbuzz.so.0",
+    "/home/minecraft/multicraft/servers/server269565/node_modules/canvas/build/Release/libfreetype.so.6",
+    "/home/minecraft/multicraft/servers/server269565/node_modules/canvas/build/Release/librsvg-2.so.2",
+    "/home/minecraft/multicraft/servers/server269565/node_modules/canvas/build/Release/libgio-2.0.so.0",
+    "/home/minecraft/multicraft/servers/server269565/node_modules/canvas/build/Release/libgdk_pixbuf-2.0.so.0",
+    "/home/minecraft/multicraft/servers/server269565/node_modules/canvas/build/Release/libjpeg.so.62",
+    "/home/minecraft/multicraft/servers/server269565/node_modules/canvas/build/Release/libgif.so.7",
+    "/home/minecraft/multicraft/servers/server269565/node_modules/canvas/build/Release/libfontconfig.so.1",
+    "/lib/x86_64-linux-gnu/librt.so.1",
+    "/home/minecraft/multicraft/servers/server269565/node_modules/canvas/build/Release/libpangoft2-1.0.so.0",
+    "/home/minecraft/multicraft/servers/server269565/node_modules/canvas/build/Release/libfribidi.so.0",
+    "/home/minecraft/multicraft/servers/server269565/node_modules/canvas/build/Release/libffi.so.7",
+    "/home/minecraft/multicraft/servers/server269565/node_modules/canvas/build/Release/libpcre.so.1",
+    "/home/minecraft/multicraft/servers/server269565/node_modules/canvas/build/Release/libcairo-gobject.so.2",
+    "/home/minecraft/multicraft/servers/server269565/node_modules/canvas/build/Release/libxml2.so.2",
+    "/home/minecraft/multicraft/servers/server269565/node_modules/canvas/build/Release/libexpat.so.1",
+    "/lib/x86_64-linux-gnu/libuuid.so.1",
+    "/home/minecraft/multicraft/servers/server269565/node_modules/canvas/build/Release/libgmodule-2.0.so.0"
+  ]
+}

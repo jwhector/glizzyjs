@@ -1,6 +1,6 @@
 const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize('mysql://customer_269565_glizzy:42rqJA~jddf5@dFrFtp0@na03-sql.pebblehost.com/customer_269565_glizzy');
+const sequelize = new Sequelize('mysql://customer_269565_glizzy:nR0p#zUExGLHsZBj~aaZ@na03-sql.pebblehost.com/customer_269565_glizzy');
 
 const Users = require('./models/Users')(sequelize, Sequelize.DataTypes);
 // const Exchange = require('./models/Exchange')(sequelize, Sequelize.DataTypes);
