@@ -1,36 +1,17 @@
 {
-  "name": "glizzyjs",
+  "name": "gobblerv2",
   "version": "1.0.0",
-  "description": "Glizzys United Discord bot built using Node.js",
+  "description": "Gobbler bot v2",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Jared Hector",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
-    "@octokit/core": "^3.5.1",
-    "@stdlib/stdlib": "^0.0.96",
-    "axios": "^0.21.1",
-    "bluebird": "^3.7.2",
-    "canvas": "^2.8.0",
-    "cron": "^1.8.2",
-    "discord-reply": "^0.1.2",
-    "discord.js": "^12.5.1",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.2",
-    "mysql2": "^2.2.5",
-    "pg": "^8.5.1",
-    "pg-hstore": "^2.3.3",
-    "sequelize": "^6.6.2"
+    "discord.js": "^13.8.1",
+    "express": "^4.18.1",
+    "sequelize": "^6.21.2"
   },
-  "nodeVersion": "12.16.3",
-  "devDependencies": {
-    "eslint": "^8.8.0",
-    "eslint-config-esnext": "^2.0.0",
-    "eslint-config-node": "^2.0.0",
-    "eslint-plugin-import": "^2.25.4",
-    "eslint-plugin-react": "^7.28.0"
-  }
+  "type": "module"
 }

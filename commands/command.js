@@ -1,14 +1,12 @@
-class Command {
-	constructor(gobbler) {
-		this.gobbler = gobbler;
-		this.commands = getCommands();
-	}
+import { Collection } from 'discord.js';
+import Bot, { Users, Guilds, Messages } from '../Bot';
 
-	async execute(msg) {
-		const commandMsg = checkPrefix(this.gobbler, msg, this.commands);
+export default async function Command() {
+    const commands = getCommands();
+
+	this.execute = async (msg) => {
+		const commandMsg = checkPrefix(this.gobbler, msg, commands);
 		if (!commandMsg) return;
-
-		// console.log('EXECUTE');
 
 		const command = this.commands.get(commandMsg.command);
 
@@ -22,11 +20,10 @@ class Command {
 
 function getCommands() {
 	const fs = require('fs');
-	const commands = new (require('discord.js').Collection)();
+	const commands = new Collection();
 	// eslint-disable-next-line no-path-concat
 	const commandFiles = fs.readdirSync(__dirname + '/commandList').filter(file => file.endsWith('.js'));
 
-	// eslint-disable-next-line no-unused-vars
 	for (const file of commandFiles) {
 		const command = require(`./commandList/${file}`);
 		commands.set(command.name, command);
